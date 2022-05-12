@@ -7,9 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d">
 
+    <Grid>
     <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="statusPanel" UseLayoutRounding="True">
-        <Button Width="335" Height="230" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72"  Click="ClickHandler" HorizontalAlignment="Center">
+        <Button Width="335" Height="230" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72" Click="ClickHandler" HorizontalAlignment="Center">
             +
         </Button>
     </VariableSizedWrapGrid>
+
+        <Button  Click="EventHandler">Event</Button>
+    </Grid>
 </Page>

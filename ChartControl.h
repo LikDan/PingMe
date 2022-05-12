@@ -27,6 +27,13 @@ namespace winrt::PingMe::implementation
 
     private:
         static Windows::UI::Xaml::DependencyProperty m_pointsJsonProperty;
+
+
+        //static Windows::UI::Xaml::DependencyProperty m_pointsJsonProperty;
+
+        Windows::UI::Xaml::Controls::Canvas chart;
+        Windows::UI::Xaml::Controls::StackPanel timePanel;
+        Windows::UI::Xaml::Controls::Canvas pingPanel;
     };
 }
 namespace winrt::PingMe::factory_implementation

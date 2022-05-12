@@ -12,7 +12,7 @@
                         <TextBlock Text="{TemplateBinding Host}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 15 0 0" />
                         <TextBlock Text="{TemplateBinding Cooldown}" HorizontalAlignment="Right" VerticalAlignment="Top" />
 
-                        <local:ChartControl PointsJson="{TemplateBinding Points}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <local:ChartControl  PointsJson="{TemplateBinding Points}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                         <Button x:Name="button" Width="150" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Edit"/>
                         <Button x:Name="button2" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Info"/>
@@ -29,10 +29,7 @@
                     <Grid Background="#d0d0d0" CornerRadius="15" Width="315" Height="125">
                         <Canvas x:Name="ping" Height="100" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <StackPanel x:Name="time" Width="290" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal"/>
-                        <Canvas x:Name="chart" Width="290" Height="100" HorizontalAlignment="Right" VerticalAlignment="Top">
-                            <Line X1="-2" Y1="0" X2="-2" Y2="100" Stroke="Black" StrokeThickness="1"/>
-                            <Line X1="-3" Y1="101" X2="290" Y2="101" Stroke="Black" StrokeThickness="1"/>
-                        </Canvas>
+                        <Canvas x:Name="chart" Width="290" Height="100" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

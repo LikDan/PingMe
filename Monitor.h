@@ -81,6 +81,12 @@ struct Monitor {
 	RGB color;
 	vector<Ping> pings;
 
+	void event() {
+		color = { 255, 50, 50 };
+
+		pings.push_back({ 40, time(0), 400 });
+	}
+
 	json serialize() {
 		json j;
 		j["name"] = name;

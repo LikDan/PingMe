@@ -47,15 +47,43 @@ namespace winrt::PingMe::implementation
     void ChartControl::OnChanged(Windows::UI::Xaml::DependencyObject const& d, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&){
         if (PingMe::ChartControl theControl{ d.try_as<PingMe::ChartControl>() }) {
             PingMe::implementation::ChartControl* ptr{ winrt::get_self<PingMe::implementation::ChartControl>(theControl) };
+            ptr->OnApplyTemplate();
         }
     }
 
 
     void ChartControl::OnApplyTemplate() {
-        auto chart = GetTemplateChild(L"chart").as<Canvas>();
-        auto timePanel = GetTemplateChild(L"time").as<StackPanel>();
-        auto pingPanel = GetTemplateChild(L"ping").as<Canvas>();
+        chart = GetTemplateChild(L"chart").as<Canvas>();
+        timePanel = GetTemplateChild(L"time").as<StackPanel>();
+        pingPanel = GetTemplateChild(L"ping").as<Canvas>();
        
+        if (chart == NULL || timePanel == NULL || pingPanel == NULL) {
+            return;
+        }
+
+        chart.Children().Clear();
+        timePanel.Children().Clear();
+        pingPanel.Children().Clear();
+
+        auto hLine = Line();
+        hLine.X1(-3);
+        hLine.Y1(101);
+        hLine.X2(290);
+        hLine.Y2(101);
+        hLine.StrokeThickness(1);
+        hLine.Stroke(RGB{ 0, 0, 0, 100 }.brush());
+
+        auto vLine = Line();
+        vLine.X1(-2);
+        vLine.Y1(0);
+        vLine.X2(-2);
+        vLine.Y2(100);
+        vLine.StrokeThickness(1);
+        vLine.Stroke(RGB{ 0, 0, 0, 100 }.brush());
+
+        chart.Children().Append(hLine);
+        chart.Children().Append(vLine);
+
         auto _11hAgo = time(0) - 60 * 60 * 11;
 
         vector<Ping> pings;
