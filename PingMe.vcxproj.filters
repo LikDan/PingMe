@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="Themes\Generic.xaml">
+      <Filter>Templates</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="App.idl" />
+    <Midl Include="MainPage.idl" />
+    <Midl Include="StatusControl.idl">
+      <Filter>Templates\StatusControl</Filter>
+    </Midl>
+    <Midl Include="ChartControl.idl">
+      <Filter>Templates\ChartControl</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="MainPage.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="StatusControl.cpp">
+      <Filter>Templates\StatusControl</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartControl.cpp">
+      <Filter>Templates\ChartControl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="StatusControl.h">
+      <Filter>Templates\StatusControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Monitor.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartControl.h">
+      <Filter>Templates\ChartControl</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{e48dc53e-40b1-40cb-970a-f89935452892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Templates">
+      <UniqueIdentifier>{cdccfc98-d9f5-4e6b-a047-79d388ae75b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Templates\StatusControl">
+      <UniqueIdentifier>{0bb2a2b8-8591-45e3-8513-7bdee3da8807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{b883342c-ee06-44c9-99ac-fce1519e2a62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Templates\ChartControl">
+      <UniqueIdentifier>{947e91e9-5f56-4bed-9137-f8cbccc84f9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+</Project>

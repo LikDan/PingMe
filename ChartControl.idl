@@ -1,0 +1,10 @@
+namespace PingMe
+{
+    runtimeclass ChartControl : Windows.UI.Xaml.Controls.Control
+    {
+        ChartControl();
+        static Windows.UI.Xaml.DependencyProperty PointsJsonProperty{ get; };
+        
+        String PointsJson;
+    }
+}
