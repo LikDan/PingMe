@@ -8,11 +8,11 @@
     mc:Ignorable="d">
 
     <Grid>
-    <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="statusPanel" UseLayoutRounding="True">
-        <Button Width="335" Height="230" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72" Click="ClickHandler" HorizontalAlignment="Center">
-            +
-        </Button>
-    </VariableSizedWrapGrid>
+        <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="statusPanel" UseLayoutRounding="True">
+            <Button Width="335" Height="230" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72" Click="ClickHandler" HorizontalAlignment="Center">
+                +
+            </Button>
+        </VariableSizedWrapGrid>
 
         <Button  Click="EventHandler">Event</Button>
     </Grid>

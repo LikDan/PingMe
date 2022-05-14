@@ -3,6 +3,7 @@
 #include "MainPage.g.cpp"
 
 #include "Monitor.h"
+#include "AddMonitorDialog.h"
 
 #include "ctime";
 
@@ -19,17 +20,30 @@ namespace winrt::PingMe::implementation
         InitializeComponent();
     }
 
-    void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&) {
-        time_t t = time(0) - 60 * 60 * 12;
-        monitors.insert(pair<winrt::hstring, Monitor>(L"google", { "Working", "google.com", "5min", {50, 255, 20}, { {100, t, 200},  {150, t + 60 * 30, 200},  {70, t + 60 * 90, 400},  {201, t + 60 * 120, 400},  {20, t + 60 * 200, 200} } }));
+    Windows::Foundation::IAsyncAction MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&) {
+        auto dialogContent = PingMe::AddMonitorDialog();
 
-        auto control = StatusControl();
-        control.Margin({ 10, 10, 10, 10 });
-        control.Host(L"google");
+        winrt::Windows::UI::Xaml::Controls::ContentDialog addMonitorDialog;
 
-        views[L"google"] = control;
+        addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
+        addMonitorDialog.Content(dialogContent);
+        addMonitorDialog.PrimaryButtonText(L"Ok");
+        addMonitorDialog.CloseButtonText(L"Close");
 
-        statusPanel().Children().InsertAt(0, control);
+        auto result = co_await addMonitorDialog.ShowAsync();
+
+        if (result == winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) {
+            dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
+            auto name = dialogContent.Add();
+
+            auto control = StatusControl();
+            control.Margin({ 10, 10, 10, 10 });
+            control.Host(name);
+
+            views[name] = control;
+
+            statusPanel().Children().InsertAt(0, control);
+        }
     }
 
     void MainPage::EventHandler(IInspectable const&, RoutedEventArgs const&) {

@@ -62,7 +62,7 @@ namespace winrt::PingMe::implementation
     }
 
     void StatusControl::ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args) {
-        sender.as<Button>().Content(box_value(L"OMG"));
+
     }
 
     void StatusControl::OnApplyTemplate() {

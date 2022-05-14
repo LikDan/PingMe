@@ -1,0 +1,10 @@
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass AddMonitorDialog : Windows.UI.Xaml.Controls.Page
+    {
+        AddMonitorDialog();
+
+        String Add();
+    }
+}

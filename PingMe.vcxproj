@@ -111,6 +111,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AddMonitorDialog.h">
+      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="ChartControl.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Monitor.h" />
@@ -127,6 +131,9 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddMonitorDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -149,6 +156,10 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddMonitorDialog.cpp">
+      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="ChartControl.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -163,6 +174,10 @@
     <ClCompile Include="StatusControl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="AddMonitorDialog.idl">
+      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>

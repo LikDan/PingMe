@@ -8,6 +8,9 @@
     <Page Include="Themes\Generic.xaml">
       <Filter>Templates</Filter>
     </Page>
+    <Page Include="AddMonitorDialog.xaml">
+      <Filter>Dialogs</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl" />
@@ -39,10 +42,12 @@
     <ClInclude Include="Monitor.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Libs</Filter>
+    </ClInclude>
     <ClInclude Include="ChartControl.h">
       <Filter>Templates\ChartControl</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -85,6 +90,12 @@
     </Filter>
     <Filter Include="Templates\ChartControl">
       <UniqueIdentifier>{947e91e9-5f56-4bed-9137-f8cbccc84f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{d5b86335-af32-4e26-9dde-5b3ef32454bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{e7749e34-3ff4-43ca-b835-8fdf9a7d1d1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
