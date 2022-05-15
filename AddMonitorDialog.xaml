@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Orientation="Vertical">
-        <TextBox x:Name="nameText" PlaceholderText="Monitor name"/>
-        <TextBox x:Name="hostText" PlaceholderText="Host"/>
-        <TextBox x:Name="intervalText" PlaceholderText="Interval"/>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15" Orientation="Vertical" Width="250">
+        <TextBox x:Name="nameText" PlaceholderText="Google" Header="Monitor Name"/>
+        <TextBox x:Name="hostText" PlaceholderText="google.com" Header="Host"/>
+        <TextBox x:Name="intervalText" PlaceholderText="60" Header="Interval (Min)"/>
     </StackPanel>
 </Page>

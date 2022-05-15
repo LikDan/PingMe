@@ -6,5 +6,6 @@ namespace PingMe
         AddMonitorDialog();
 
         String Add();
+        void Edit(String name);
     }
 }

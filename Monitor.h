@@ -120,4 +120,6 @@ struct Monitor {
 		return { j["name"].get<string>(), j["host"].get<string>(), j["cooldown"].get<string>(), color, pings };
 	}
 };
+
 __declspec(selectany) map<winrt::hstring, Monitor> monitors;
+__declspec(selectany) map<winrt::hstring, winrt::PingMe::StatusControl> monitorViews;

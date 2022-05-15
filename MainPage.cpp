@@ -15,7 +15,7 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::PingMe::implementation
 {
-    map<hstring, StatusControl> views;
+    //map<hstring, PingMe::StatusControl> views;
     MainPage::MainPage() {
         InitializeComponent();
     }
@@ -23,7 +23,7 @@ namespace winrt::PingMe::implementation
     Windows::Foundation::IAsyncAction MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&) {
         auto dialogContent = PingMe::AddMonitorDialog();
 
-        winrt::Windows::UI::Xaml::Controls::ContentDialog addMonitorDialog;
+        Controls::ContentDialog addMonitorDialog;
 
         addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
         addMonitorDialog.Content(dialogContent);
@@ -32,24 +32,27 @@ namespace winrt::PingMe::implementation
 
         auto result = co_await addMonitorDialog.ShowAsync();
 
-        if (result == winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) {
-            dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
-            auto name = dialogContent.Add();
+        if (result != winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) co_return;
 
-            auto control = StatusControl();
-            control.Margin({ 10, 10, 10, 10 });
-            control.Host(name);
+        dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
+        auto name = dialogContent.Add();
 
-            views[name] = control;
+        if (name == L"") co_return;
 
-            statusPanel().Children().InsertAt(0, control);
-        }
+        auto control = PingMe::StatusControl();
+        control.Margin({10, 10, 10, 10});
+        control.Host(name);
+        
+         monitorViews[name] = control;
+
+        statusPanel().Children().InsertAt(0, control);
     }
 
     void MainPage::EventHandler(IInspectable const&, RoutedEventArgs const&) {
         monitors[L"google"].event();
 
+        /*
         views[L"google"].Host(L"google2");
-        views[L"google"].Host(L"google");
+        views[L"google"].Host(L"google");*/
     }
 }
