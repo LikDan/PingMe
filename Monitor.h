@@ -3,6 +3,8 @@
 #include "Monitor.g.h"
 #include <CheckEvent.g.h>
 
+
+
 namespace winrt::PingMe::implementation
 {
 	struct Monitor : MonitorT<Monitor>

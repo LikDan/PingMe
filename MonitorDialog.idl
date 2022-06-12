@@ -1,0 +1,9 @@
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass MonitorDialog : Windows.UI.Xaml.Controls.ContentDialog
+    {
+        MonitorDialog();
+        Int32 MyProperty;
+    }
+}

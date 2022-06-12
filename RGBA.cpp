@@ -3,8 +3,3 @@
 #if __has_include("RGBA.g.cpp")
 #include "RGBA.g.cpp"
 #endif
-
-namespace winrt::PingMe::implementation
-{
-
-}

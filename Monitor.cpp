@@ -4,7 +4,3 @@
 #include "Monitor.g.cpp"
 #endif
 
-namespace winrt::PingMe::implementation
-{
-
-}

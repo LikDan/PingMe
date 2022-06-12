@@ -121,7 +121,6 @@
       <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="ChartControl.h" />
     <ClInclude Include="CheckEvent.h">
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -152,7 +151,6 @@
       <DependentUpon>RGBA.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="StatusControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -168,9 +166,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PingChartControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -193,7 +188,6 @@
       <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="ChartControl.cpp" />
     <ClCompile Include="CheckEvent.cpp">
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -225,7 +219,6 @@
       <DependentUpon>RGBA.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="StatusControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="AddMonitorDialog.idl">
@@ -235,7 +228,6 @@
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
-    <Midl Include="ChartControl.idl" />
     <Midl Include="CheckEvent.idl">
       <SubType>Designer</SubType>
     </Midl>
@@ -257,7 +249,6 @@
     <Midl Include="RGBA.idl">
       <SubType>Designer</SubType>
     </Midl>
-    <Midl Include="StatusControl.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

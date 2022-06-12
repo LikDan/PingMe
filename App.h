@@ -1,9 +1,6 @@
 ﻿#pragma once
 #include "App.xaml.g.h"
 
-#include "StatusControl.h"
-#include "ChartControl.h"
-
 namespace winrt::PingMe::implementation
 {
     struct App : AppT<App>
