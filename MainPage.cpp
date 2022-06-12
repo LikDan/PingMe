@@ -39,6 +39,8 @@ namespace winrt::PingMe::implementation
 		auto control = MonitorPreviewControl(monitor);
 		control.Margin({10, 10, 10, 10});
 
+		monitor.Parent(control);
+
 		monitors[monitor.Name()] = pair(monitor, control);
 
 		statusPanel().Children().InsertAt(0, control);

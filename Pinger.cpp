@@ -9,24 +9,42 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::PingMe::implementation
 {
-    Pinger::Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<int> const& handler)
+    Pinger::Pinger() = default;
+
+    Pinger::Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler)
     {
+        this->handler = handler;
+        this->host = host;
+
         this->timer = DispatcherTimer();
-        this->timer.Interval(std::chrono::milliseconds{ timeout });
+        this->timer.Interval(std::chrono::seconds{ timeout });
         this->timer.Start();
 
-        auto lambda = [handler, host](IInspectable const&, IInspectable const&)
-        {
-            //TODO check site
-            handler(nullptr, 1);
-        };
-        
+        auto lambda = [=](IInspectable const&, IInspectable const&) { Check(); };
+
 
         this->timer.Tick(lambda);
     }
 
+    void Pinger::Pause()
+    {
+        this->timer.Stop();
+    }
+
     void Pinger::Continue()
     {
-        //handlerEvent(*this, 1);
+        this->timer.Start();
+    }
+
+    void Pinger::Check()
+    { 
+        //TODO check site
+
+        time_t now = time(nullptr);
+
+        int statusCode = rand() % 500 + 100;
+        int ping = rand() % 1000;
+
+        handler(nullptr, CheckEvent(ping, statusCode, now));
     }
 }

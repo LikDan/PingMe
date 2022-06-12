@@ -1,11 +1,16 @@
+import "CheckEvent.idl";
+
 namespace PingMe
 {
     [default_interface]
     runtimeclass Pinger
     {
-        Pinger(String host, Int32 timeout, Windows.Foundation.EventHandler<Int32> handler);
+        Pinger();
+        Pinger(String host, Int32 timeout, Windows.Foundation.EventHandler<CheckEvent> handler);
 
         void Pause();
         void Continue();
+
+        void Check();
     }
 }

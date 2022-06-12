@@ -2,7 +2,6 @@ import "RGBA.idl";
 
 namespace PingMe
 {
-    [bindable]
     [default_interface]
     runtimeclass CheckEvent 
     {

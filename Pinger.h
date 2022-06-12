@@ -1,22 +1,24 @@
 ﻿#pragma once
 
+#include "pch.h"
 #include "Pinger.g.h"
 
 namespace winrt::PingMe::implementation
 {
 	struct Pinger : PingerT<Pinger>
 	{
-		Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<int> const& handler);
+		Pinger();
+		Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler);
 
-		void Pause()
-		{
-			
-		};
+		void Pause();
 		void Continue();
-		
 
+		void Check();
 	private:
 		Windows::UI::Xaml::DispatcherTimer timer;
+
+		hstring host;
+		Windows::Foundation::EventHandler<PingMe::CheckEvent> handler;
 	};
 }
 
