@@ -1,0 +1,17 @@
+import "RGBA.idl";
+
+namespace PingMe
+{
+    [bindable]
+    [default_interface]
+    runtimeclass CheckEvent 
+    {
+        CheckEvent(Int32 ping, Int32 statusCode, Int64 time);
+
+        RGBA color();
+
+        Int32 Ping{ get; };
+        Int32 StatusCode{ get; };
+        Int64 Time{ get; };
+    }
+}

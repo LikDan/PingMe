@@ -1,0 +1,15 @@
+import "Monitor.idl";
+
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass MonitorPreviewControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        MonitorPreviewControl(Monitor monitor);
+        MonitorPreviewControl();
+
+        void Update();
+
+        Monitor Monitor{ get; };
+    }
+}

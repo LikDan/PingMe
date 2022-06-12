@@ -4,6 +4,8 @@
 
 #include <winrt/Windows.UI.Xaml.Media.h>
 
+#include "Monitors.h"
+
 namespace winrt::PingMe::implementation
 {
 	using namespace Windows::UI::Xaml;
@@ -73,42 +75,34 @@ namespace winrt::PingMe::implementation
 		}
 	}
 
-	Windows::Foundation::IAsyncAction StatusControl::ClickHandler(Windows::Foundation::IInspectable const& sender,
+	void StatusControl::ClickHandler(Windows::Foundation::IInspectable const& sender,
 	                                                              Windows::UI::Xaml::RoutedEventArgs const& args)
 	{
-		auto dialogContent = PingMe::AddMonitorDialog();
-		dialogContent.Edit(Host());
-
-		Controls::ContentDialog addMonitorDialog;
-
-		addMonitorDialog.Title(winrt::box_value(L"Edit monitor"));
-		addMonitorDialog.Content(dialogContent);
-		addMonitorDialog.PrimaryButtonText(L"Ok");
-		addMonitorDialog.CloseButtonText(L"Close");
-
-		auto result = co_await addMonitorDialog.ShowAsync();
-
-		if (result != winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) co_return;
-
-		dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
-		auto name = dialogContent.Add();
-
-		if (name == L"") co_return;
-
-		auto oldHost = Host();
-		auto host = to_hstring(monitors[name].host);
-		Host(host);
-
-		if (oldHost != host)
-		{
-			monitorViews[host] = monitorViews[oldHost];
-			monitorViews.erase(oldHost);
-		}
+		
 	}
 
 	void StatusControl::OnApplyTemplate()
 	{
 		Button button = GetTemplateChild(L"button").as<Button>();
 		button.Click({this, &StatusControl::ClickHandler});
+	}
+
+	void StatusControl::Update()
+	{
+		/*Monitor m = monitors[MonitorName()];
+
+		json pingsJson;
+		for each (Ping ping in m.pings) {
+			json j = ping.serialize();
+
+			pingsJson.push_back(j);
+		}
+
+		auto color = m.color.brush();
+
+		SetValue(m_colorProperty, winrt::box_value(color));
+		SetValue(m_hostProperty, winrt::box_value(winrt::to_hstring(m.host)));
+		SetValue(m_cooldownProperty, winrt::box_value(winrt::to_hstring(m.cooldown)));
+		SetValue(m_pointsProperty, winrt::box_value(winrt::to_hstring(pingsJson.dump())));*/
 	}
 }

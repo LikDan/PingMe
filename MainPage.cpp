@@ -1,58 +1,70 @@
-﻿#include "pch.h"
-#include "MainPage.h"
+﻿#include "MainPage.h"
 #include "MainPage.g.cpp"
+#include "pch.h"
 
-#include "Monitor.h"
 #include "AddMonitorDialog.h"
+#include "Monitor.h"
 
 #include "ctime";
+#include "Monitors.h"
 
 using namespace std;
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
-
 namespace winrt::PingMe::implementation
 {
-    //map<hstring, PingMe::StatusControl> views;
-    MainPage::MainPage() {
-        InitializeComponent();
-    }
+	MainPage::MainPage()
+	{
+		InitializeComponent();
+	}
 
-    Windows::Foundation::IAsyncAction MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&) {
-        auto dialogContent = PingMe::AddMonitorDialog();
+	Windows::Foundation::IAsyncAction MainPage::ClickHandler(const IInspectable&, const RoutedEventArgs&)
+	{
+		auto dialogContent = PingMe::AddMonitorDialog();
 
-        Controls::ContentDialog addMonitorDialog;
+		Controls::ContentDialog addMonitorDialog;
 
-        addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
-        addMonitorDialog.Content(dialogContent);
-        addMonitorDialog.PrimaryButtonText(L"Ok");
-        addMonitorDialog.CloseButtonText(L"Close");
+		addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
+		addMonitorDialog.Content(dialogContent);
+		addMonitorDialog.PrimaryButtonText(L"Ok");
+		addMonitorDialog.CloseButtonText(L"Close");
 
-        auto result = co_await addMonitorDialog.ShowAsync();
+		auto result = co_await addMonitorDialog.ShowAsync();
 
-        if (result != winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) co_return;
+		if (result != Controls::ContentDialogResult::Primary) co_return;
 
-        dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
-        auto name = dialogContent.Add();
+		dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
+		auto monitor = dialogContent.Add();
 
-        if (name == L"") co_return;
+		if (monitor == nullptr) co_return;
 
-        auto control = PingMe::StatusControl();
-        control.Margin({10, 10, 10, 10});
-        control.Host(name);
-        
-         monitorViews[name] = control;
+		auto control = MonitorPreviewControl(monitor);
+		control.Margin({10, 10, 10, 10});
 
-        statusPanel().Children().InsertAt(0, control);
-    }
+		monitors[monitor.Name()] = pair(monitor, control);
 
-    void MainPage::EventHandler(IInspectable const&, RoutedEventArgs const&) {
-        monitors[L"google"].event();
+		statusPanel().Children().InsertAt(0, control);
+	}
 
-        /*
-        views[L"google"].Host(L"google2");
-        views[L"google"].Host(L"google");*/
-    }
+	void MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
+	{
+		// monitors[L"Google"].event();
+	}
+
+	void MainPage::StartHandler(const IInspectable&, const RoutedEventArgs&)
+	{
+		// monitors[L"Google"].launch();
+	}
+
+	void MainPage::WriteHandler(const IInspectable&, const RoutedEventArgs&)
+	{
+	}
+
+	void MainPage::Handler(const IInspectable&, const IInspectable&)
+	{
+		// monitors[L"Google"].event();
+		// monitorViews[L"Google"].MonitorName(L"Google");
+	}
 }

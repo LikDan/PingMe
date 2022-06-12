@@ -1,0 +1,23 @@
+import "CheckEvent.idl";
+
+namespace PingMe
+{
+    [bindable]
+    [default_interface]
+    runtimeclass Monitor 
+    {
+        Monitor(String name, String host, Int32 timeout, Windows.Foundation.Collections.IVector<CheckEvent> events);
+        Monitor();
+           
+        void check();
+         
+        void start();
+        void pause();
+
+        String Name{ get; };
+        String Host{ get; };
+        Int32 Timeout{ get; };
+
+        Windows.Foundation.Collections.IVector<CheckEvent> Events{ get; };
+    }
+}

@@ -15,5 +15,7 @@
         </VariableSizedWrapGrid>
 
         <Button  Click="EventHandler">Event</Button>
+        <Button  Click="StartHandler" Margin="65,0,0,0">Start</Button>
+        <Button  Click="WriteHandler" Margin="130,0,0,0">Write docs</Button>
     </Grid>
 </Page>

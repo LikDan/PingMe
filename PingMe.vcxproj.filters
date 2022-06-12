@@ -11,6 +11,12 @@
     <Page Include="AddMonitorDialog.xaml">
       <Filter>Dialogs</Filter>
     </Page>
+    <Page Include="MonitorPreviewControl.xaml">
+      <Filter>Templates</Filter>
+    </Page>
+    <Page Include="PingChartControl.xaml">
+      <Filter>Templates</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl" />
@@ -20,6 +26,18 @@
     </Midl>
     <Midl Include="ChartControl.idl">
       <Filter>Templates\ChartControl</Filter>
+    </Midl>
+    <Midl Include="Pinger.idl">
+      <Filter>Models\Pinger</Filter>
+    </Midl>
+    <Midl Include="CheckEvent.idl">
+      <Filter>Models</Filter>
+    </Midl>
+    <Midl Include="RGBA.idl">
+      <Filter>Models</Filter>
+    </Midl>
+    <Midl Include="Monitor.idl">
+      <Filter>Models</Filter>
     </Midl>
   </ItemGroup>
   <ItemGroup>
@@ -33,20 +51,26 @@
     <ClCompile Include="ChartControl.cpp">
       <Filter>Templates\ChartControl</Filter>
     </ClCompile>
+    <ClCompile Include="Pinger.cpp">
+      <Filter>Models\Pinger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="StatusControl.h">
       <Filter>Templates\StatusControl</Filter>
     </ClInclude>
-    <ClInclude Include="Monitor.h">
+    <ClInclude Include="ChartControl.h">
+      <Filter>Templates\ChartControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Monitors.h">
       <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Pinger.h">
+      <Filter>Models\Pinger</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Libs</Filter>
-    </ClInclude>
-    <ClInclude Include="ChartControl.h">
-      <Filter>Templates\ChartControl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +120,9 @@
     </Filter>
     <Filter Include="Dialogs">
       <UniqueIdentifier>{e7749e34-3ff4-43ca-b835-8fdf9a7d1d1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Pinger">
+      <UniqueIdentifier>{97113956-9208-41b6-831b-b08e854b4e54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

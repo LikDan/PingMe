@@ -1,0 +1,12 @@
+import "CheckEvent.idl";
+
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass PingChartControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        PingChartControl();
+
+        void Update(Windows.Foundation.Collections.IVector<CheckEvent> events);
+    }
+}

@@ -6,7 +6,7 @@
 
 #include "winrt/Windows.UI.Popups.h"
 
-#include "Monitor.h"
+#include "Monitors.h"
 #include <regex>
 
 using namespace winrt;
@@ -22,28 +22,25 @@ namespace winrt::PingMe::implementation
         InitializeComponent();
     }
 
-    void AddMonitorDialog::Edit(hstring name) {
-        auto monitor = monitors[name];
-
-        nameText().Text(winrt::to_hstring(monitor.name));
-        hostText().Text(winrt::to_hstring(monitor.host));
-        intervalText().Text(winrt::to_hstring(monitor.cooldown));
+    void AddMonitorDialog::Edit(PingMe::Monitor monitor) {
+        nameText().Text(monitor.Name());
+        hostText().Text(monitor.Host());
+        intervalText().Text(winrt::to_hstring(monitor.Timeout()));
     }
 
-    hstring AddMonitorDialog::Add() {
-        auto name = winrt::to_string(nameText().Text());
-        auto host = winrt::to_string(hostText().Text());
-        auto interval = winrt::to_string(intervalText().Text());
+    PingMe::Monitor AddMonitorDialog::Add() {
+        auto name = nameText().Text();
+        auto host = hostText().Text();
+        auto interval = intervalText().Text();
 
-        if (name == "" || !regex_match(host, urlRegex) || !regex_match(interval, std::regex("[0-9]{1,2}"))) {
+        if (name == L"" || !regex_match(to_string(host), urlRegex) || !regex_match(to_string(interval), std::regex("[0-9]{1,5}"))) {
             MessageDialog dialog(L"Wrong data");
             dialog.ShowAsync();
 
-            return L"";
+            return PingMe::Monitor(nullptr);
         }
 
-        monitors.insert(pair<winrt::hstring, Monitor>(hostText().Text(), { name, host, interval, {50, 255, 20}}));
-
-        return hostText().Text();
+        int i = std::stoi(to_string(interval));
+        return Monitor(name, host, i, Windows::Foundation::Collections::IVector<PingMe::CheckEvent>());
     }
 }

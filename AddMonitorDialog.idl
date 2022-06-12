@@ -1,3 +1,5 @@
+import "Monitor.idl";
+
 namespace PingMe
 {
     [default_interface]
@@ -5,7 +7,7 @@ namespace PingMe
     {
         AddMonitorDialog();
 
-        String Add();
-        void Edit(String name);
+        Monitor Add();
+        void Edit(Monitor monitor);
     }
 }

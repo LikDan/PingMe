@@ -1,0 +1,13 @@
+namespace PingMe
+{
+    [bindable]
+    [default_interface]
+    runtimeclass RGBA 
+    {
+        RGBA(Int32 r, Int32 g, Int32 b, Int32 a);
+        RGBA(Int32 r, Int32 g, Int32 b);
+
+        Windows.UI.Color color();
+        Windows.UI.Xaml.Media.SolidColorBrush brush(); 
+    }
+}

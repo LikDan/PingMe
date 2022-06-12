@@ -29,6 +29,8 @@ namespace winrt::PingMe::implementation
 
         void MonitorName(winrt::hstring const& value) {
             SetValue(m_nameProperty, winrt::box_value(value));
+
+            Update();
         }
 
         winrt::hstring Host() {
@@ -36,22 +38,7 @@ namespace winrt::PingMe::implementation
         }
 
         void Host(winrt::hstring const& value) {
-            Monitor m = monitors[value];
-
-            json pingsJson;
-            for each (Ping ping in m.pings) {
-                json j = ping.serialize();
-
-                pingsJson.push_back(j);
-            }
-
-            auto color = m.color.brush();
-
-            SetValue(m_colorProperty, winrt::box_value(color));
-            SetValue(m_nameProperty, winrt::box_value(winrt::to_hstring(m.name)));
-            SetValue(m_hostProperty, winrt::box_value(winrt::to_hstring(m.host)));
-            SetValue(m_cooldownProperty, winrt::box_value(winrt::to_hstring(m.cooldown)));
-            SetValue(m_pointsProperty, winrt::box_value(winrt::to_hstring(pingsJson.dump())));
+            SetValue(m_hostProperty, winrt::box_value(value));
         }
 
         winrt::hstring Cooldown() {
@@ -79,10 +66,11 @@ namespace winrt::PingMe::implementation
 
         static void OnChanged(Windows::UI::Xaml::DependencyObject const&, Windows::UI::Xaml::DependencyPropertyChangedEventArgs const&);
 
-        Windows::Foundation::IAsyncAction ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 
         void OnApplyTemplate();
 
+        void Update();
 
     private:
         static Windows::UI::Xaml::DependencyProperty m_colorProperty;

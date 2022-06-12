@@ -26,7 +26,7 @@ struct CPoint {
     int x;
     int y;
 
-    RGB color;
+    //RGB color;
 };
 
 namespace winrt::PingMe::implementation
@@ -65,7 +65,7 @@ namespace winrt::PingMe::implementation
         timePanel.Children().Clear();
         pingPanel.Children().Clear();
 
-        auto hLine = Line();
+        /*auto hLine = Line();
         hLine.X1(-3);
         hLine.Y1(101);
         hLine.X2(290);
@@ -200,6 +200,6 @@ namespace winrt::PingMe::implementation
             Canvas::SetTop(pingText, chart.Height() - i / scaleY);
 
             pingPanel.Children().Append(pingText);
-        }
+        }*/
     }
 }

@@ -1,0 +1,11 @@
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass Pinger
+    {
+        Pinger(String host, Int32 timeout, Windows.Foundation.EventHandler<Int32> handler);
+
+        void Pause();
+        void Continue();
+    }
+}

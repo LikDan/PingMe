@@ -14,5 +14,7 @@ namespace PingMe
         String Host;
         String Cooldown;
         String Points;
+
+        void Update();
     }
 }
