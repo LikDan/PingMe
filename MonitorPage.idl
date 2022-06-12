@@ -1,0 +1,13 @@
+import "Monitor.idl";
+
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass MonitorPage : Windows.UI.Xaml.Controls.ContentDialog
+    {
+        MonitorPage();
+        MonitorPage(Monitor monitor);
+
+        Monitor Result();
+    }
+}

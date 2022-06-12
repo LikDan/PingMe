@@ -2,11 +2,12 @@
 #include "MainPage.g.cpp"
 #include "pch.h"
 
-#include "AddMonitorDialog.h"
 #include "Monitor.h"
+#include "Monitors.h"
 
 #include "ctime";
-#include "Monitors.h"
+
+using namespace winrt::Windows::UI::Xaml::Controls;
 
 using namespace std;
 
@@ -22,23 +23,18 @@ namespace winrt::PingMe::implementation
 
 	Windows::Foundation::IAsyncAction MainPage::ClickHandler(const IInspectable&, const RoutedEventArgs&)
 	{
-		auto dialogContent = PingMe::AddMonitorDialog();
+		MonitorPage monitorDialog;
 
-		Controls::ContentDialog addMonitorDialog;
+		monitorDialog.Title(winrt::box_value(L"Add new monitor"));
+		monitorDialog.PrimaryButtonText(L"Ok");
+		monitorDialog.CloseButtonText(L"Close");
 
-		addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
-		addMonitorDialog.Content(dialogContent);
-		addMonitorDialog.PrimaryButtonText(L"Ok");
-		addMonitorDialog.CloseButtonText(L"Close");
-
-		auto result = co_await addMonitorDialog.ShowAsync();
+		auto result = co_await monitorDialog.ShowAsync();
 
 		if (result != Controls::ContentDialogResult::Primary) co_return;
 
-		dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
-		auto monitor = dialogContent.Add();
-
-		if (monitor == nullptr) co_return;
+	
+		auto monitor = monitorDialog.Result();
 
 		auto control = MonitorPreviewControl(monitor);
 		control.Margin({10, 10, 10, 10});
@@ -48,10 +44,17 @@ namespace winrt::PingMe::implementation
 		statusPanel().Children().InsertAt(0, control);
 	}
 
-	void MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
+	Windows::Foundation::IAsyncAction MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
 	{
-		// monitors[L"Google"].event();
-	}
+		MonitorPage addMonitorDialog;
+
+		addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
+		addMonitorDialog.PrimaryButtonText(L"Ok");
+		addMonitorDialog.CloseButtonText(L"Close");
+		auto result = co_await addMonitorDialog.ShowAsync();
+
+		if (result != Controls::ContentDialogResult::Primary) co_return;
+  	}
 
 	void MainPage::StartHandler(const IInspectable&, const RoutedEventArgs&)
 	{

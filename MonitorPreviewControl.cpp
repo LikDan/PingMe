@@ -12,7 +12,7 @@ namespace winrt::PingMe::implementation
 {
 	MonitorPreviewControl::MonitorPreviewControl() { InitializeComponent(); }
 
-	MonitorPreviewControl::MonitorPreviewControl(winrt::PingMe::Monitor const& monitor) : MonitorPreviewControl()
+	MonitorPreviewControl::MonitorPreviewControl(PingMe::Monitor const& monitor) : MonitorPreviewControl()
 	{
 		this->monitor = monitor;
 
@@ -32,24 +32,17 @@ namespace winrt::PingMe::implementation
 
 	Windows::Foundation::IAsyncAction MonitorPreviewControl::EditHandler(IInspectable const&, RoutedEventArgs const&)
 	{
-		auto dialogContent = PingMe::AddMonitorDialog();
-		dialogContent.Edit(this->monitor);
+		MonitorPage monitorDialog(this->monitor);
 
-		Controls::ContentDialog addMonitorDialog;
+		monitorDialog.Title(winrt::box_value(L"Edit monitor"));
+		monitorDialog.PrimaryButtonText(L"Ok");
+		monitorDialog.CloseButtonText(L"Close");
 
-		addMonitorDialog.Title(winrt::box_value(L"Edit monitor"));
-		addMonitorDialog.Content(dialogContent);
-		addMonitorDialog.PrimaryButtonText(L"Ok");
-		addMonitorDialog.CloseButtonText(L"Close");
+		auto result = co_await monitorDialog.ShowAsync();
 
-		auto result = co_await addMonitorDialog.ShowAsync();
+		if (result != Controls::ContentDialogResult::Primary) co_return;
 
-		if (result != winrt::Windows::UI::Xaml::Controls::ContentDialogResult::Primary) co_return;
-
-		dialogContent = addMonitorDialog.Content().as<PingMe::AddMonitorDialog>();
-		auto newMonitor = dialogContent.Add();
-
-		if (newMonitor == nullptr) co_return;
+		auto newMonitor = monitorDialog.Result();
 
 		auto name = this->monitor.Name();
 		auto newName = newMonitor.Name();

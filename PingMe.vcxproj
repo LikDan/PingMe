@@ -117,10 +117,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AddMonitorDialog.h">
-      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
     <ClInclude Include="CheckEvent.h">
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -128,6 +124,10 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Monitor.h">
       <DependentUpon>Monitor.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="MonitorPage.h">
+      <DependentUpon>MonitorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="MonitorPreviewControl.h">
@@ -156,10 +156,10 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddMonitorDialog.xaml">
+    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="MonitorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MonitorPreviewControl.xaml">
@@ -184,16 +184,16 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddMonitorDialog.cpp">
-      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
     <ClCompile Include="CheckEvent.cpp">
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="Monitor.cpp">
       <DependentUpon>Monitor.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="MonitorPage.cpp">
+      <DependentUpon>MonitorPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="MonitorPreviewControl.cpp">
@@ -221,10 +221,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="AddMonitorDialog.idl">
-      <DependentUpon>AddMonitorDialog.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
     <Midl Include="App.idl">
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
@@ -236,6 +232,10 @@
     </Midl>
     <Midl Include="Monitor.idl">
       <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="MonitorPage.idl">
+      <DependentUpon>MonitorPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
     <Midl Include="MonitorPreviewControl.idl">
       <DependentUpon>MonitorPreviewControl.xaml</DependentUpon>

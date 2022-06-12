@@ -5,14 +5,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
-    <Page Include="AddMonitorDialog.xaml">
-      <Filter>Dialogs</Filter>
-    </Page>
     <Page Include="MonitorPreviewControl.xaml">
       <Filter>Templates</Filter>
     </Page>
     <Page Include="PingChartControl.xaml">
       <Filter>Templates</Filter>
+    </Page>
+    <Page Include="MonitorPage.xaml">
+      <Filter>Dialogs</Filter>
     </Page>
   </ItemGroup>
   <ItemGroup>
