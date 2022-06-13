@@ -1,0 +1,11 @@
+namespace PingMe
+{
+    [bindable]
+    [default_interface]
+    runtimeclass Settings 
+    {
+        Settings();
+        
+        Int32 ChartHours{ get; set; };
+    }
+}

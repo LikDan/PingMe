@@ -151,6 +151,14 @@
       <DependentUpon>RGBA.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="Settings.h">
+      <DependentUpon>Settings.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="SettingsDialog.h">
+      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -166,6 +174,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PingChartControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -219,6 +230,14 @@
       <DependentUpon>RGBA.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <DependentUpon>Settings.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="SettingsDialog.cpp">
+      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
@@ -248,6 +267,13 @@
     <Midl Include="Pinger.idl" />
     <Midl Include="RGBA.idl">
       <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="Settings.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="SettingsDialog.idl">
+      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Midl>
   </ItemGroup>
   <ItemGroup>

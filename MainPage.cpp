@@ -18,6 +18,7 @@ namespace winrt::PingMe::implementation
 {
 	MainPage::MainPage()
 	{
+		//TODO => settings -> colors, chart scale; info -> my github with readme
 		InitializeComponent();
 	}
 
@@ -48,7 +49,7 @@ namespace winrt::PingMe::implementation
 
 	Windows::Foundation::IAsyncAction MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
 	{
-		MonitorPage addMonitorDialog;
+		SettingsDialog addMonitorDialog;
 
 		addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
 		addMonitorDialog.PrimaryButtonText(L"Ok");
@@ -56,6 +57,11 @@ namespace winrt::PingMe::implementation
 		auto result = co_await addMonitorDialog.ShowAsync();
 
 		if (result != Controls::ContentDialogResult::Primary) co_return;
+
+		for each (auto monitor in monitors)
+		{
+			monitor.second.second.Update();
+		}
   	}
 
 	void MainPage::StartHandler(const IInspectable&, const RoutedEventArgs&)

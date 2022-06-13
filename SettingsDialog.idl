@@ -1,0 +1,8 @@
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass SettingsDialog : Windows.UI.Xaml.Controls.ContentDialog
+    {
+        SettingsDialog();
+    }
+}

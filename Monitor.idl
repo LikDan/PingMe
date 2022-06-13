@@ -8,7 +8,7 @@ namespace PingMe
     runtimeclass Monitor 
     {
         Monitor();
-        Monitor(String name, String host, Int32 timeout);
+        Monitor(String name, String host, String method, String body, String headers, String cookies, Int32 timeout);
         
         MonitorPreviewControl Parent{ get; set; };
 
@@ -19,6 +19,10 @@ namespace PingMe
 
         String Name{ get; };
         String Host{ get; };
+        String Method{ get; };
+        String Body{ get; };
+        String Headers{ get; };
+        String Cookies{ get; };
         Int32 Timeout{ get; };
 
         Windows.Foundation.Collections.IVector<CheckEvent> Events{ get; };

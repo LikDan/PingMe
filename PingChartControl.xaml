@@ -9,7 +9,7 @@
 
     <Grid Background="#d0d0d0" CornerRadius="15" Width="315" Height="125">
         <Canvas x:Name="PingCanvas" Height="100" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <StackPanel x:Name="TimeCanvas" Width="290" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal"/>
-        <Canvas x:Name="ChartCanvas" Width="290" Height="100" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <StackPanel x:Name="TimeCanvas" Width="270" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal"  Margin="0,0,20,0"/>
+        <Canvas x:Name="ChartCanvas" Width="270" Height="100" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,20,0"/>
     </Grid>
 </UserControl>

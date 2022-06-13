@@ -14,6 +14,9 @@
     <Page Include="MonitorPage.xaml">
       <Filter>Dialogs</Filter>
     </Page>
+    <Page Include="SettingsDialog.xaml">
+      <Filter>Dialogs</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl" />
@@ -28,6 +31,9 @@
       <Filter>Models</Filter>
     </Midl>
     <Midl Include="Monitor.idl">
+      <Filter>Models</Filter>
+    </Midl>
+    <Midl Include="Settings.idl">
       <Filter>Models</Filter>
     </Midl>
   </ItemGroup>

@@ -7,6 +7,9 @@
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 #include <winrt/Windows.UI.Xaml.Shapes.h>
 
+
+#include <Monitors.h>
+
 using namespace winrt;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml;
@@ -53,7 +56,7 @@ namespace winrt::PingMe::implementation
         ChartCanvas().Children().Append(hLine);
         ChartCanvas().Children().Append(vLine);
 
-        auto _11hAgo = time(0) - 60 * 60 * 11;
+        auto _11hAgo = time(0) - 60 * 60 * (settings.ChartHours());
 
         std::vector<CPoint> points;
         std::vector<CheckEvent> checkEvents;
@@ -89,7 +92,7 @@ namespace winrt::PingMe::implementation
             if (point.y > maxY) maxY = point.y;
         }
 
-        double scaleX = 60 * 12 / ChartCanvas().Width();
+        double scaleX = 60 * settings.ChartHours() / ChartCanvas().Width();
         double scaleY = maxY / ChartCanvas().Height();
 
         for (int i = 0; i < points.size(); i++) {
@@ -132,7 +135,7 @@ namespace winrt::PingMe::implementation
 
         TimeCanvas().Padding({ marginStart / scaleX, 0, 0, 0 });
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < settings.ChartHours(); i++) {
             auto h = to_hstring(timeCouner->tm_hour);
             auto m = to_hstring(timeCouner->tm_min);
 

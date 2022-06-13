@@ -29,7 +29,7 @@ namespace winrt::PingMe::implementation
     
     PingMe::Monitor MonitorPage::Result() {
         int timeout = std::stoi(to_string(TimeoutText().Text()));
-        return Monitor(NameText().Text(), HostText().Text(), timeout);
+        return Monitor(NameText().Text(), HostText().Text(), MethodText().Text(), BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
     }
 
     void MonitorPage::TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args)
