@@ -52,21 +52,27 @@ namespace winrt::PingMe::implementation
             http::Request request{ to_string(monitor.Host()) };
 
             http::HeaderFields headerFields;
-            auto headersJson = json::parse(monitor.Headers());
-            for (json::iterator it = headersJson.begin(); it != headersJson.end(); ++it) {
-                headerFields.push_back(std::pair(it.key(), it.value()));
+            if (monitor.Headers() != L"")
+            {
+                auto headersJson = json::parse(monitor.Headers());
+                for (json::iterator it = headersJson.begin(); it != headersJson.end(); ++it) {
+                    headerFields.push_back(std::pair(it.key(), it.value()));
+                }
             }
 
-            std::string cookies;
-            auto cookiesJson = json::parse(monitor.Cookies());
-            for (json::iterator it = cookiesJson.begin(); it != cookiesJson.end(); ++it) {
-                if (it != cookiesJson.begin()) cookies += ";";
-                cookies += it.key();
-                cookies += "=";
-                cookies += it.value();
-            }
+            if (monitor.Cookies() != L"")
+            {
+                std::string cookies;
+                auto cookiesJson = json::parse(monitor.Cookies());
+                for (json::iterator it = cookiesJson.begin(); it != cookiesJson.end(); ++it) {
+                    if (it != cookiesJson.begin()) cookies += ";";
+                    cookies += it.key();
+                    cookies += "=";
+                    cookies += it.value();
+                }
 
-            headerFields.push_back(std::pair("Cookie", cookies));
+                headerFields.push_back(std::pair("Cookie", cookies));
+            }
 
             auto startTime = system_clock::now().time_since_epoch().count();
             const auto response = request.send(to_string(monitor.Method()), to_string(monitor.Body()), headerFields);

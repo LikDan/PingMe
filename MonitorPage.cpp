@@ -23,6 +23,17 @@ namespace winrt::PingMe::implementation
     {
         NameText().Text(monitor.Name());
         HostText().Text(monitor.Host());
+
+        if (monitor.Method() == L"GET") MethodText().SelectedIndex(0);
+        if (monitor.Method() == L"POST") MethodText().SelectedIndex(1);
+        if (monitor.Method() == L"PUT") MethodText().SelectedIndex(2);
+        if (monitor.Method() == L"DELETE") MethodText().SelectedIndex(3);
+       
+
+        BodyText().Text(monitor.Body());
+        HeadersText().Text(monitor.Headers());
+        CookiesText().Text(monitor.Cookies());
+
         TimeoutText().Text(to_hstring(monitor.Timeout()));
 
         TextUpdate(nullptr, nullptr);
@@ -30,7 +41,8 @@ namespace winrt::PingMe::implementation
     
     PingMe::Monitor MonitorPage::Result() {
         int timeout = std::stoi(to_string(TimeoutText().Text()));
-        return Monitor(NameText().Text(), HostText().Text(), MethodText().Text(), BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
+        auto method = unbox_value<hstring>(MethodText().SelectedValue().as<Controls::ComboBoxItem>().Content());
+        return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
     }
 
     void MonitorPage::TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args)

@@ -41,8 +41,10 @@ namespace winrt::PingMe::implementation
 		auto result = co_await monitorDialog.ShowAsync();
 
 		if (result != Controls::ContentDialogResult::Primary) co_return;
+		this->monitor.Pause();
 
 		auto newMonitor = monitorDialog.Result();
+		newMonitor.Parent(monitor.Parent());
 
 		auto name = this->monitor.Name();
 		auto newName = newMonitor.Name();
