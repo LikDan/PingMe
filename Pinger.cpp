@@ -7,6 +7,10 @@
 #include "HTTPRequests.h"
 #include <chrono>
 
+
+#include "json.hpp"
+using json = nlohmann::json;
+
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
@@ -47,10 +51,25 @@ namespace winrt::PingMe::implementation
         {
             http::Request request{ to_string(monitor.Host()) };
 
-            
+            http::HeaderFields headerFields;
+            auto headersJson = json::parse(monitor.Headers());
+            for (json::iterator it = headersJson.begin(); it != headersJson.end(); ++it) {
+                headerFields.push_back(std::pair(it.key(), it.value()));
+            }
+
+            std::string cookies;
+            auto cookiesJson = json::parse(monitor.Cookies());
+            for (json::iterator it = cookiesJson.begin(); it != cookiesJson.end(); ++it) {
+                if (it != cookiesJson.begin()) cookies += ";";
+                cookies += it.key();
+                cookies += "=";
+                cookies += it.value();
+            }
+
+            headerFields.push_back(std::pair("Cookie", cookies));
 
             auto startTime = system_clock::now().time_since_epoch().count();
-            const auto response = request.send(to_string(monitor.Method()), to_string(monitor.Body()), {});
+            const auto response = request.send(to_string(monitor.Method()), to_string(monitor.Body()), headerFields);
             int ping = (system_clock::now().time_since_epoch().count() - startTime) / 100000;
 
             auto body = to_hstring(std::string{ response.body.begin(), response.body.end() });
@@ -60,7 +79,7 @@ namespace winrt::PingMe::implementation
                 headers = headers + L"{" + to_hstring(header.first) + L": " + to_hstring(header.second) + L"}\n";
             }
 
-            handler(nullptr, CheckEvent(ping, response.status.code, body, L"", time(nullptr)));
+            handler(nullptr, CheckEvent(ping, response.status.code, body, headers, time(nullptr)));
         }
         catch (const std::exception& e)
         {

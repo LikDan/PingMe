@@ -17,7 +17,7 @@
         </ComboBox>
         <TextBox x:Name="TimeoutText" PlaceholderText="300" Header="Timeout (Sec)" KeyUp="TextUpdate"/>
         <TextBox x:Name="BodyText" PlaceholderText="Some body" Header="Body"/>
-        <TextBox x:Name="HeadersText" PlaceholderText="[{&quot;Name&quot;: &quot;Value&quot;}, {&quot;Name&quot;: &quot;Value&quot;}]" Header="Headers" KeyUp="TextUpdate"/>
-        <TextBox x:Name="CookiesText" PlaceholderText="[{&quot;Name&quot;: &quot;Value&quot;}, {&quot;Name&quot;: &quot;Value&quot;}]" Header="Cookies" KeyUp="TextUpdate"/>
+        <TextBox x:Name="HeadersText" PlaceholderText="{}{&quot;Name&quot;:&quot;Value&quot;,&quot;Name&quot;:&quot;Value&quot;}" Header="Headers" KeyUp="TextUpdate"/>
+        <TextBox x:Name="CookiesText" PlaceholderText="{}{&quot;Name&quot;:&quot;Value&quot;,&quot;Name&quot;:&quot;Value&quot;}" Header="Cookies" KeyUp="TextUpdate"/>
     </StackPanel>
 </ContentControl>

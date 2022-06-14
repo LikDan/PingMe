@@ -12,6 +12,10 @@ namespace winrt::PingMe::implementation
 			this->name = name;
 			this->host = host;
 			this->timeout = timeout;
+			this->method = method;
+			this->body = body;
+			this->headers = headers;
+			this->cookies = cookies;
 
 			std::vector<PingMe::CheckEvent> values{};
 			this->events = single_threaded_vector(std::move(values));

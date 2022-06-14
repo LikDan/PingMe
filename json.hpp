@@ -18169,6 +18169,11 @@ namespace nlohmann
             return basic_json(init, false, value_t::object);
         }
 
+        auto value(initializer_list_t init = {})
+        {
+            return m_value;
+        }
+
         /// @brief construct an array with count copies of given value
         /// @sa https://json.nlohmann.me/api/basic_json/basic_json/
         basic_json(size_type cnt, const basic_json& val)

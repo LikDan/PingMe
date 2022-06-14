@@ -6,13 +6,10 @@
 
 #include <regex>
 
-#include "json.hpp"
-
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Input;
 
-using json = nlohmann::json;
 
 namespace winrt::PingMe::implementation
 {
