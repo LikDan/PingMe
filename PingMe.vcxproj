@@ -121,6 +121,7 @@
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="HTTPRequests.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Monitor.h">
       <DependentUpon>Monitor.idl</DependentUpon>

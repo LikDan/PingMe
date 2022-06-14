@@ -4,20 +4,25 @@
 #include "Pinger.g.cpp"
 #endif
 
+#include "HTTPRequests.h"
+#include <chrono>
+
 using namespace winrt;
 using namespace Windows::UI::Xaml;
+
+using namespace std::chrono;
 
 namespace winrt::PingMe::implementation
 {
     Pinger::Pinger() = default;
 
-    Pinger::Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler)
+    Pinger::Pinger(PingMe::Monitor monitor, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler)
     {
+        this->monitor = monitor;
         this->handler = handler;
-        this->host = host;
 
         this->timer = DispatcherTimer();
-        this->timer.Interval(std::chrono::seconds{ timeout });
+        this->timer.Interval(std::chrono::seconds{ monitor.Timeout() });
         this->timer.Start();
 
         auto lambda = [=](IInspectable const&, IInspectable const&) { Check(); };
@@ -38,13 +43,28 @@ namespace winrt::PingMe::implementation
 
     void Pinger::Check()
     { 
-        //TODO check site
+        try
+        {
+            http::Request request{ to_string(monitor.Host()) };
 
-        time_t now = time(nullptr);
+            
 
-        int statusCode = rand() % 500 + 100;
-        int ping = rand() % 1000;
+            auto startTime = system_clock::now().time_since_epoch().count();
+            const auto response = request.send(to_string(monitor.Method()), to_string(monitor.Body()), {});
+            int ping = (system_clock::now().time_since_epoch().count() - startTime) / 100000;
 
-        handler(nullptr, CheckEvent(ping, statusCode, now));
+            auto body = to_hstring(std::string{ response.body.begin(), response.body.end() });
+            hstring headers;
+            for each (auto header in response.headerFields)
+            {
+                headers = headers + L"{" + to_hstring(header.first) + L": " + to_hstring(header.second) + L"}\n";
+            }
+
+            handler(nullptr, CheckEvent(ping, response.status.code, body, L"", time(nullptr)));
+        }
+        catch (const std::exception& e)
+        {
+            handler(nullptr, CheckEvent(0, 0, L"", L"", time(nullptr)));
+        }
     }
 }

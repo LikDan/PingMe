@@ -8,7 +8,7 @@ namespace winrt::PingMe::implementation
 	struct Pinger : PingerT<Pinger>
 	{
 		Pinger();
-		Pinger(hstring host, int timeout, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler);
+		Pinger(PingMe::Monitor monitor, Windows::Foundation::EventHandler<PingMe::CheckEvent> const& handler);
 
 		void Pause();
 		void Continue();
@@ -17,7 +17,7 @@ namespace winrt::PingMe::implementation
 	private:
 		Windows::UI::Xaml::DispatcherTimer timer;
 
-		hstring host;
+		PingMe::Monitor monitor = PingMe::Monitor(nullptr);
 		Windows::Foundation::EventHandler<PingMe::CheckEvent> handler;
 	};
 }

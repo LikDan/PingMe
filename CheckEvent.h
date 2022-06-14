@@ -7,10 +7,12 @@ namespace winrt::PingMe::implementation
 {
     struct CheckEvent : CheckEventT<CheckEvent>
     {
-        CheckEvent(int ping, int statusCode, long time)
+        CheckEvent(int ping, int statusCode, hstring body, hstring headers, long time)
         {
 	        this->ping = ping;
-	        this->statusCode = statusCode;
+            this->statusCode = statusCode;
+            this->body = body;
+            this->headers = headers;
             this->time = time;
         };
 
@@ -30,10 +32,13 @@ namespace winrt::PingMe::implementation
 
         int Ping() { return ping; }
         int StatusCode() { return statusCode; }
+        hstring Body() { return body; }
+        hstring Headers() { return headers; }
         long Time() { return time; }
 
     private:
         int ping, statusCode;
+        hstring body, headers;
         long time;
     };
 }

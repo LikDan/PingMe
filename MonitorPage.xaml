@@ -8,7 +8,7 @@
     mc:Ignorable="d">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15" Orientation="Vertical" Width="250">
         <TextBox x:Name="NameText" PlaceholderText="Google" Header="Monitor Name" KeyUp="TextUpdate"/>
-        <TextBox x:Name="HostText" PlaceholderText="https://google.com" Header="Host" KeyUp="TextUpdate"/>
+        <TextBox x:Name="HostText" PlaceholderText="http://google.com" Header="Host" KeyUp="TextUpdate"/>
         <ComboBox x:Name="MethodText" Header="Method" Width="250">
             <ComboBoxItem IsSelected="True">GET</ComboBoxItem>
             <ComboBoxItem>POST</ComboBoxItem>
@@ -17,7 +17,7 @@
         </ComboBox>
         <TextBox x:Name="TimeoutText" PlaceholderText="300" Header="Timeout (Sec)" KeyUp="TextUpdate"/>
         <TextBox x:Name="BodyText" PlaceholderText="Some body" Header="Body"/>
-        <TextBox x:Name="HeadersText" PlaceholderText="{}{&quot;Name&quot;: &quot;Value&quot;}" Header="Headers"/>
-        <TextBox x:Name="CookiesText" PlaceholderText="{}{&quot;Name&quot;: &quot;Value&quot;}" Header="Cookies"/>
+        <TextBox x:Name="HeadersText" PlaceholderText="[{&quot;Name&quot;: &quot;Value&quot;}, {&quot;Name&quot;: &quot;Value&quot;}]" Header="Headers" KeyUp="TextUpdate"/>
+        <TextBox x:Name="CookiesText" PlaceholderText="[{&quot;Name&quot;: &quot;Value&quot;}, {&quot;Name&quot;: &quot;Value&quot;}]" Header="Cookies" KeyUp="TextUpdate"/>
     </StackPanel>
 </ContentControl>

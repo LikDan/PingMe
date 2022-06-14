@@ -5,12 +5,14 @@ namespace PingMe
     [default_interface]
     runtimeclass CheckEvent 
     {
-        CheckEvent(Int32 ping, Int32 statusCode, Int64 time);
+        CheckEvent(Int32 ping, Int32 statusCode, String Body, String Headers, Int64 time);
 
         RGBA color();
 
         Int32 Ping{ get; };
         Int32 StatusCode{ get; };
+        String Body{ get; };
+        String Headers{ get; };
         Int64 Time{ get; };
     }
 }

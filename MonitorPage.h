@@ -18,7 +18,8 @@ namespace winrt::PingMe::implementation
         void TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args);
 
     private:
-        const std::regex urlRegex = std::regex("^(http:\/\/|https:\/\/)(www.)?[a-zA-Z0-9-]+.([a-z]+)?\/?[0-9a-zA-Z%/-]*$");
+        const std::regex urlRegex = std::regex("http://[a-zA-Z0-9%\-./]+");
+        const std::regex jsonMapRegex = std::regex("\\{\"[^\"]+\":\"[^\"]+\"(?:,\"[^\"]+\":\"[^\"]*\"){0,}\\}");
         const std::regex timeoutRegex = std::regex("[0-9]{1,5}");
     };
 }

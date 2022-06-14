@@ -6,9 +6,13 @@
 
 #include <regex>
 
+#include "json.hpp"
+
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Input;
+
+using json = nlohmann::json;
 
 namespace winrt::PingMe::implementation
 {
@@ -34,7 +38,11 @@ namespace winrt::PingMe::implementation
 
     void MonitorPage::TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args)
     {
-        bool enable = NameText().Text() != L"" && std::regex_match(to_string(HostText().Text()), urlRegex) && std::regex_match(to_string(TimeoutText().Text()), timeoutRegex);
+        bool enable = NameText().Text() != L"" &&
+            std::regex_match(to_string(HostText().Text()), urlRegex) &&
+            (HeadersText().Text() == L"" || std::regex_match(to_string(HeadersText().Text()), jsonMapRegex)) &&
+            (CookiesText().Text() == L"" || std::regex_match(to_string(CookiesText().Text()), jsonMapRegex)) &&
+            std::regex_match(to_string(TimeoutText().Text()), timeoutRegex);
         this->IsPrimaryButtonEnabled(enable);
     }
 }

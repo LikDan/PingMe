@@ -16,7 +16,7 @@ namespace winrt::PingMe::implementation
 			std::vector<PingMe::CheckEvent> values{};
 			this->events = single_threaded_vector(std::move(values));
 
-			this->pinger = Pinger(host, timeout, { this, &Monitor::PingCheck });
+			this->pinger = Pinger(*this, { this, &Monitor::PingCheck });
 		};
 
 		Monitor() = default;

@@ -57,6 +57,9 @@
     <ClInclude Include="json.hpp">
       <Filter>Libs</Filter>
     </ClInclude>
+    <ClInclude Include="HTTPRequests.h">
+      <Filter>Libs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
