@@ -77,6 +77,7 @@ namespace winrt::PingMe::implementation
 		}
 
 		this->monitor = newMonitor;
+		saveMonitors();
 
 		StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
 		Update();

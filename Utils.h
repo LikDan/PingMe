@@ -79,7 +79,7 @@ namespace winrt::PingMe::implementation
 			std::vector<PingMe::CheckEvent> values{};
 			auto events = single_threaded_vector(std::move(values));
 
-			auto eventsJson = monitorJson["events"].array();
+			auto eventsJson = monitorJson["events"];
 			for each (auto eventJson in eventsJson)
 			{
 				auto ping = eventJson["ping"].get<int>();

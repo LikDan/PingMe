@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "Monitor.g.h"
-#include <CheckEvent.g.h>
+#include <Utils.h>
 
 namespace winrt::PingMe::implementation
 {
@@ -20,7 +20,7 @@ namespace winrt::PingMe::implementation
 			std::vector<PingMe::CheckEvent> values{};
 			this->events = single_threaded_vector(std::move(values));
 
-			this->pinger = Pinger(*this, { this, &Monitor::PingCheck });
+			this->pinger = PingMe::Pinger(*this, { this, &Monitor::PingCheck });
 		};
 
 		Monitor() = default;
@@ -55,11 +55,13 @@ namespace winrt::PingMe::implementation
 		hstring Headers() { return this->headers; }
 		hstring Cookies() { return this->cookies; }
 		int Timeout() { return this->timeout; }
-		Windows::Foundation::Collections::IVector<winrt::PingMe::CheckEvent> Events() { return this->events; }
-		void Events(Windows::Foundation::Collections::IVector<winrt::PingMe::CheckEvent> events) { this->events = events; }
+		Windows::Foundation::Collections::IVector<PingMe::CheckEvent> Events() { return this->events; }
+		void Events(Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events) { this->events = events; }
 
 		void PingCheck(IInspectable const& sender, PingMe::CheckEvent const& e)
 		{
+			saveMonitors();
+
 			this->events.Append(e);
 			if (parent != nullptr) parent.Update();
 		}
@@ -69,7 +71,7 @@ namespace winrt::PingMe::implementation
 		int timeout;
 		Windows::Foundation::Collections::IVector<winrt::PingMe::CheckEvent> events;
 
-		Pinger pinger;
+		PingMe::Pinger pinger;
 		PingMe::MonitorPreviewControl parent = PingMe::MonitorPreviewControl(nullptr);
 	};
 }
