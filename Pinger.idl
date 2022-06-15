@@ -13,5 +13,7 @@ namespace PingMe
         void Continue();
 
         void Check();
+
+        Boolean IsLaunching();
     }
 }

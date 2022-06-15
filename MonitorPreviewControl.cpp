@@ -4,9 +4,12 @@
 #include "MonitorPreviewControl.g.cpp"
 #endif
 #include <Utils.h>
+#include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
+using namespace Windows::Foundation;
+using namespace Windows::UI::Xaml::Media::Imaging;
 
 namespace winrt::PingMe::implementation
 {
@@ -28,6 +31,21 @@ namespace winrt::PingMe::implementation
 		TimeoutTextBlock().Text(to_hstring(this->monitor.Timeout()));
 
 		PingChart().Update(this->monitor.Events());
+	}
+
+	void MonitorPreviewControl::StateChange(IInspectable const&, RoutedEventArgs const&) 
+	{
+		if (this->monitor.IsLaunching())
+		{
+			this->monitor.Pause();
+			StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Play.png")));
+		}
+		else 
+		{
+			this->monitor.Continue();
+			StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
+		}
+
 	}
 
 	Windows::Foundation::IAsyncAction MonitorPreviewControl::EditHandler(IInspectable const&, RoutedEventArgs const&)
@@ -59,6 +77,8 @@ namespace winrt::PingMe::implementation
 		}
 
 		this->monitor = newMonitor;
+
+		StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
 		Update();
 	}
 }

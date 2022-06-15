@@ -16,6 +16,7 @@ namespace winrt::PingMe::implementation
         void Update();
 
         Windows::Foundation::IAsyncAction EditHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void StateChange(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 
         winrt::PingMe::Monitor Monitor() { return this->monitor; }
 

@@ -14,6 +14,8 @@ namespace winrt::PingMe::implementation
 		void Continue();
 
 		void Check();
+
+		bool IsLaunching();
 	private:
 		Windows::UI::Xaml::DispatcherTimer timer;
 

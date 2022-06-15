@@ -17,6 +17,8 @@ namespace PingMe
         void Continue();
         void Pause();
 
+        Boolean IsLaunching();
+
         String Name{ get; };
         String Host{ get; };
         String Method{ get; };

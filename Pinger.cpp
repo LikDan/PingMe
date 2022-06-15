@@ -92,4 +92,9 @@ namespace winrt::PingMe::implementation
             handler(nullptr, CheckEvent(0, 0, L"", L"", time(nullptr)));
         }
     }
+
+    bool Pinger::IsLaunching()
+    {
+        return this->timer.IsEnabled();
+    }
 }

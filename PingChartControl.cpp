@@ -56,23 +56,28 @@ namespace winrt::PingMe::implementation
         ChartCanvas().Children().Append(hLine);
         ChartCanvas().Children().Append(vLine);
 
-        auto _11hAgo = time(0) - 60 * 60 * (settings.ChartHours());
+		auto chartHours = time(0) - 60 * 60 * (settings.ChartHours());
 
         std::vector<CPoint> points;
         std::vector<CheckEvent> checkEvents;
         if (events == nullptr || events.Size() < 2) return;
 
         int maxPing = 0;
+        int minPing = 0;
 
         for (int i = 0; i < events.Size(); i++) {
-            if (difftime(events.GetAt(i).Time(), _11hAgo) < 0) continue;
+            if (difftime(events.GetAt(i).Time(), chartHours) < 0) continue;
 
             RGBA color(0, 0, 0);
             switch (events.GetAt(i).StatusCode() / 100) {
+            case 1:
             case 2:
+            case 3:
                 color = RGBA(50, 255, 50);
                 break;
+            case 0:
             case 4:
+            case 5:
                 color = RGBA(255, 50, 50, 100);
                 break;
             default:
@@ -80,10 +85,11 @@ namespace winrt::PingMe::implementation
                 break;
             }
 
-            points.push_back({ (int)(events.GetAt(i).Time() - _11hAgo) / 60, events.GetAt(i).Ping(), color});
+            points.push_back({ (int)(events.GetAt(i).Time() - chartHours) / 60, events.GetAt(i).Ping(), color});
             checkEvents.push_back(events.GetAt(i));
 
             if (events.GetAt(i).Ping() > maxPing) maxPing = events.GetAt(i).Ping();
+            if (events.GetAt(i).Ping() < minPing) minPing = events.GetAt(i).Ping();
         }
 
 
@@ -101,7 +107,7 @@ namespace winrt::PingMe::implementation
         }
 
         for (int i = 1; i < points.size(); i++) {
-            if (checkEvents[i].StatusCode() / 100 == 4) {
+            if (checkEvents[i].StatusCode() / 100 == 0 || checkEvents[i].StatusCode() / 100 == 4 || checkEvents[i].StatusCode() / 100 == 5) {
                 auto rectangle = Rectangle();
                 rectangle.Width(points[i].x - points[i - 1].x);
                 rectangle.Height(ChartCanvas().Height());
@@ -126,12 +132,12 @@ namespace winrt::PingMe::implementation
             ChartCanvas().Children().Append(line);
         }
 
-        tm* timeCouner = localtime(&_11hAgo);
+        tm* timeCouner = localtime(&chartHours);
 
         timeCouner->tm_min = timeCouner->tm_min - timeCouner->tm_min % 60 + 60;
         timeCouner->tm_sec = 0;
 
-        int marginStart = 60 / 2 - difftime(mktime(timeCouner), _11hAgo) / 60;
+        int marginStart = 60 / 2 - difftime(mktime(timeCouner), chartHours) / 60;
 
         TimeCanvas().Padding({ marginStart / scaleX, 0, 0, 0 });
 
@@ -139,7 +145,6 @@ namespace winrt::PingMe::implementation
             auto h = to_hstring(timeCouner->tm_hour);
             auto m = to_hstring(timeCouner->tm_min);
 
-            if (h.size() == 1) h = L"0" + h;
             if (m.size() == 1) m = L"0" + m;
 
             auto timeText = TextBlock();
@@ -147,6 +152,7 @@ namespace winrt::PingMe::implementation
             timeText.Text(h + L":" + m);
             timeText.FontSize(8);
             timeText.Foreground(RGBA(0, 0, 0).brush());
+            timeText.HorizontalTextAlignment(TextAlignment::End);
 
             TimeCanvas().Children().Append(timeText);
 
@@ -169,5 +175,29 @@ namespace winrt::PingMe::implementation
 
             PingCanvas().Children().Append(pingText);
         }
+
+        auto maxPingText = TextBlock();
+        maxPingText.Width(20);
+        maxPingText.Text(to_hstring(maxPing));
+        maxPingText.FontSize(8);
+        maxPingText.Foreground(RGBA(0, 0, 0).brush());
+        maxPingText.HorizontalTextAlignment(TextAlignment::End);
+
+        Canvas::SetLeft(maxPingText, 0);
+        Canvas::SetTop(maxPingText, ChartCanvas().Height() - maxPing / scaleY);
+
+        PingCanvas().Children().Append(maxPingText);
+
+        auto minPingText = TextBlock();
+        minPingText.Width(20);
+        minPingText.Text(to_hstring(minPing));
+        minPingText.FontSize(8);
+        minPingText.Foreground(RGBA(0, 0, 0).brush());
+        minPingText.HorizontalTextAlignment(TextAlignment::End);
+
+        Canvas::SetLeft(minPingText, 0);
+        Canvas::SetTop(minPingText, ChartCanvas().Height() - minPing / scaleY);
+
+        PingCanvas().Children().Append(minPingText);
     }
 }

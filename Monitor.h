@@ -43,6 +43,11 @@ namespace winrt::PingMe::implementation
 			this->pinger.Pause();
 		};
 
+		bool IsLaunching()
+		{
+			return this->pinger.IsLaunching();
+		};
+
 		hstring Name() { return this->name; }
 		hstring Host() { return this->host; }
 		hstring Method() { return this->method; }
