@@ -25,6 +25,6 @@ namespace PingMe
         String Cookies{ get; };
         Int32 Timeout{ get; };
 
-        Windows.Foundation.Collections.IVector<CheckEvent> Events{ get; };
+        Windows.Foundation.Collections.IVector<CheckEvent> Events{ get; set; };
     }
 }

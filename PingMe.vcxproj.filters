@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Monitors.h">
+    <ClInclude Include="Utils.h">
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="Pinger.h">

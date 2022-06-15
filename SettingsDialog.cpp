@@ -4,7 +4,7 @@
 #include "SettingsDialog.g.cpp"
 #endif
 
-#include "Monitors.h"
+#include "Utils.h"
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;

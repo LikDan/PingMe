@@ -49,8 +49,9 @@ namespace winrt::PingMe::implementation
 		hstring Body() { return this->body; }
 		hstring Headers() { return this->headers; }
 		hstring Cookies() { return this->cookies; }
-		int Timeout() { return this->timeout; } 
+		int Timeout() { return this->timeout; }
 		Windows::Foundation::Collections::IVector<winrt::PingMe::CheckEvent> Events() { return this->events; }
+		void Events(Windows::Foundation::Collections::IVector<winrt::PingMe::CheckEvent> events) { this->events = events; }
 
 		void PingCheck(IInspectable const& sender, PingMe::CheckEvent const& e)
 		{

@@ -135,7 +135,7 @@
       <DependentUpon>MonitorPreviewControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Monitors.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>

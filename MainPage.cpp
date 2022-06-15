@@ -3,7 +3,7 @@
 #include "pch.h"
 
 #include "Monitor.h"
-#include "Monitors.h"
+#include "Utils.h"
 
 #include "ctime";
 
@@ -18,8 +18,24 @@ namespace winrt::PingMe::implementation
 {
 	MainPage::MainPage()
 	{
-		//TODO => settings -> colors, chart scale; info -> my github with readme
 		InitializeComponent();
+		ReadMonitors();
+	}
+
+	Windows::Foundation::IAsyncAction MainPage::ReadMonitors()
+	{
+		co_await readMonitors();
+		for each (auto _monitor in monitors)
+		{
+			_monitor.second.second;
+
+			auto control = MonitorPreviewControl(_monitor.second.first);
+			control.Margin({ 10, 10, 10, 10 });
+			statusPanel().Children().InsertAt(0, control);
+
+			_monitor.second.second = control;
+			_monitor.second.first.Parent(control);
+		}
 	}
 
 	Windows::Foundation::IAsyncAction MainPage::ClickHandler(const IInspectable&, const RoutedEventArgs&)
@@ -45,6 +61,8 @@ namespace winrt::PingMe::implementation
 		monitors[monitor.Name()] = pair(monitor, control);
 
 		statusPanel().Children().InsertAt(0, control);
+
+		saveMonitors();
 	}
 
 	Windows::Foundation::IAsyncAction MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
