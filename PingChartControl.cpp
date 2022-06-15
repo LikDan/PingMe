@@ -60,10 +60,10 @@ namespace winrt::PingMe::implementation
 
         std::vector<CPoint> points;
         std::vector<CheckEvent> checkEvents;
-        if (events == nullptr || events.Size() < 2) return;
+        if (events == nullptr || events.Size() < 1) return;
 
-        int maxPing = 0;
-        int minPing = 0;
+        int maxPing = events.GetAt(0).Ping();
+        int minPing = events.GetAt(0).Ping();
 
         for (int i = 0; i < events.Size(); i++) {
             if (difftime(events.GetAt(i).Time(), chartHours) < 0) continue;

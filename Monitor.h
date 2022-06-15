@@ -21,6 +21,8 @@ namespace winrt::PingMe::implementation
 			this->events = single_threaded_vector(std::move(values));
 
 			this->pinger = PingMe::Pinger(*this, { this, &Monitor::PingCheck });
+
+			this->Check();
 		};
 
 		Monitor() = default;
@@ -30,7 +32,7 @@ namespace winrt::PingMe::implementation
 
 		void Check()
 		{
-			this->pinger;
+			this->pinger.Check();
 		};
 
 		void Continue()
