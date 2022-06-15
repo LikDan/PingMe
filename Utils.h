@@ -15,7 +15,7 @@ using json = nlohmann::json;
 
 namespace winrt::PingMe::implementation
 {
-	__declspec(selectany) map<hstring, pair<PingMe::Monitor, PingMe::MonitorPreviewControl>> monitors;
+	__declspec(selectany) map<hstring, PingMe::Monitor> monitors;
 	__declspec(selectany) PingMe::Settings settings;
 
 	static Windows::Foundation::IAsyncAction saveMonitors() {
@@ -25,15 +25,15 @@ namespace winrt::PingMe::implementation
 		{
 			json monitorJson;
 
-			monitorJson["name"] = to_string(monitor.second.first.Name());
-			monitorJson["host"] = to_string(monitor.second.first.Host());
-			monitorJson["method"] = to_string(monitor.second.first.Method());
-			monitorJson["body"] = to_string(monitor.second.first.Body());
-			monitorJson["headers"] = to_string(monitor.second.first.Headers());
-			monitorJson["cookies"] = to_string(monitor.second.first.Cookies());
-			monitorJson["timeout"] = monitor.second.first.Timeout();
+			monitorJson["name"] = to_string(monitor.second.Name());
+			monitorJson["host"] = to_string(monitor.second.Host());
+			monitorJson["method"] = to_string(monitor.second.Method());
+			monitorJson["body"] = to_string(monitor.second.Body());
+			monitorJson["headers"] = to_string(monitor.second.Headers());
+			monitorJson["cookies"] = to_string(monitor.second.Cookies());
+			monitorJson["timeout"] = monitor.second.Timeout();
 
-			auto events = monitor.second.first.Events();
+			auto events = monitor.second.Events();
 			json eventsJson;
 			for (int i = 0; i < events.Size(); i++)
 			{
@@ -94,7 +94,7 @@ namespace winrt::PingMe::implementation
 
 			monitor.Events(events);
 
-			monitors[monitor.Name()] = pair(monitor, PingMe::MonitorPreviewControl(nullptr));
+			monitors[monitor.Name()] = monitor;
 		}
 	}
 }

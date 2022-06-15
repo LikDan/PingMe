@@ -27,14 +27,11 @@ namespace winrt::PingMe::implementation
 		co_await readMonitors();
 		for each (auto _monitor in monitors)
 		{
-			_monitor.second.second;
-
-			auto control = MonitorPreviewControl(_monitor.second.first);
+			auto control = MonitorPreviewControl(_monitor.second);
 			control.Margin({ 10, 10, 10, 10 });
 			statusPanel().Children().InsertAt(0, control);
 
-			_monitor.second.second = control;
-			_monitor.second.first.Parent(control);
+			_monitor.second.Parent(control);
 		}
 	}
 
@@ -58,7 +55,7 @@ namespace winrt::PingMe::implementation
 
 		monitor.Parent(control);
 
-		monitors[monitor.Name()] = pair(monitor, control);
+		monitors[monitor.Name()] = monitor;
 
 		statusPanel().Children().InsertAt(0, control);
 
@@ -78,7 +75,7 @@ namespace winrt::PingMe::implementation
 
 		for each (auto monitor in monitors)
 		{
-			monitor.second.second.Update();
+			monitor.second.Parent().Update();
 		}
   	}
 

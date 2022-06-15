@@ -49,7 +49,7 @@ namespace winrt::PingMe::implementation
 		auto name = this->monitor.Name();
 		auto newName = newMonitor.Name();
 
-		monitors[name].first = newMonitor;
+		monitors[name] = newMonitor;
 
 		if (newName != name)
 		{
