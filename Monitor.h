@@ -80,13 +80,13 @@ namespace winrt::PingMe::implementation
 
 		void PingCheck(IInspectable const& sender, PingMe::CheckEvent const& e)
 		{
-			PingMe::Files().SaveMonitors();
-
 			this->events.Append(e);
 			if (parent != nullptr) parent.Update();
 
 			auto checkEventControl = PingMe::CheckEventControl(this->name, e);
 			handler(nullptr, checkEventControl);
+
+			PingMe::Files().SaveMonitors();
 		}
 
 	private:
