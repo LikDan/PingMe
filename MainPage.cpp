@@ -25,6 +25,9 @@ namespace winrt::PingMe::implementation
 	Windows::Foundation::IAsyncAction MainPage::ReadMonitors()
 	{
 		co_await Files().ReadMonitors();
+
+		std::vector<std::pair<hstring, CheckEvent>> sortedEvents;
+
 		for each (auto _monitor in monitors)
 		{
 			auto control = MonitorPreviewControl(_monitor.second);
@@ -33,6 +36,25 @@ namespace winrt::PingMe::implementation
 
 			_monitor.second.Parent(control);
 			_monitor.second.LogHandler({ this, &MainPage::AddLog });
+
+			auto events = _monitor.second.Events();
+			for (int i = 0; i < events.Size(); i++) sortedEvents.push_back(std::pair(_monitor.second.Name(), events.GetAt(i)));
+		}
+
+		//source: https://www.programiz.com/dsa/insertion-sort
+		for (int step = 1; step < sortedEvents.size(); step++) {
+			long key = sortedEvents[step].second.Time();
+			int j = step - 1;
+			while (key < sortedEvents[j].second.Time() && j >= 0) {
+				sortedEvents[j + 1] = sortedEvents[j];
+				--j;
+			}
+			sortedEvents[j + 1] = sortedEvents[step];
+		}
+
+		for (int i = 0; i < 100; i++) {
+			if (sortedEvents.size() + i - 100 < 0) continue;
+			this->AddLog(nullptr, PingMe::CheckEventControl(sortedEvents[sortedEvents.size() + i - 100].first, sortedEvents[sortedEvents.size() + i - 100].second));
 		}
 	}
 
