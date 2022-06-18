@@ -7,6 +7,7 @@
 #include <winrt/Windows.UI.Xaml.Media.Imaging.h>
 #include <winrt/Windows.UI.Xaml.Shapes.h>
 
+#pragma warning(disable : 4996)
 
 #include <Utils.h>
 
@@ -68,22 +69,7 @@ namespace winrt::PingMe::implementation
         for (int i = 0; i < events.Size(); i++) {
             if (difftime(events.GetAt(i).Time(), chartHours) < 0) continue;
 
-            RGBA color(0, 0, 0);
-            switch (events.GetAt(i).StatusCode() / 100) {
-            case 1:
-            case 2:
-            case 3:
-                color = RGBA(50, 255, 50);
-                break;
-            case 0:
-            case 4:
-            case 5:
-                color = RGBA(255, 50, 50, 100);
-                break;
-            default:
-                color = RGBA(255, 255, 50);
-                break;
-            }
+            RGBA color = events.GetAt(i).color();
 
             points.push_back({ (int)(events.GetAt(i).Time() - chartHours) / 60, events.GetAt(i).Ping(), color});
             checkEvents.push_back(events.GetAt(i));

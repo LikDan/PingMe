@@ -11,6 +11,10 @@ namespace winrt::PingMe::implementation
     struct CheckEventControl : CheckEventControlT<CheckEventControl>
     {
         CheckEventControl(hstring monitorName, PingMe::CheckEvent e);
+
+    private:
+        PingMe::CheckEvent e = PingMe::CheckEvent(nullptr);
+        hstring monitorName;
     };
 }
 

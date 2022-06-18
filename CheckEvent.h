@@ -18,16 +18,21 @@ namespace winrt::PingMe::implementation
 
         RGBA color()
         {
-            if (statusCode == 200)
-            {
+            switch (this->statusCode / 100) {
+            case 1:
+            case 2:
+            case 3:
                 return RGBA(50, 255, 50);
+                break;
+            case 0:
+            case 4:
+            case 5:
+                return RGBA(255, 50, 50, 100);
+                break;
+            default:
+                return RGBA(255, 255, 50);
+                break;
             }
-            if (statusCode == 400)
-            {
-                return RGBA(255, 50, 50);
-            } 
-
-            return RGBA(0, 0, 0, 0);
         }
 
         int Ping() { return ping; }

@@ -32,17 +32,12 @@ namespace winrt::PingMe::implementation
 			statusPanel().Children().InsertAt(0, control);
 
 			_monitor.second.Parent(control);
+			_monitor.second.LogHandler({ this, &MainPage::AddLog });
 		}
 	}
 
-	void MainPage::DeleteMonitor(PingMe::MonitorPreviewControl monitor) {
-		for (int i = 0; i < statusPanel().Children().Size(); i++)
-		{
-			if (statusPanel().Children().GetAt(i) != monitor) continue;
-
-			statusPanel().Children().RemoveAt(i);
-			break;
-		}
+	void MainPage::AddLog(Windows::Foundation::IInspectable const& sender, PingMe::CheckEventControl const& control) {
+		logPanel().Children().InsertAt(0, control);
 	}
 
 	Windows::Foundation::IAsyncAction MainPage::AddHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
@@ -59,6 +54,7 @@ namespace winrt::PingMe::implementation
 
 	
 		auto monitor = monitorDialog.Result();
+		monitor.LogHandler({ this, &MainPage::AddLog });
 
 		auto control = MonitorPreviewControl(monitor);
 		control.Margin({10, 10, 10, 10});

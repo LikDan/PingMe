@@ -21,7 +21,6 @@ namespace winrt::PingMe::implementation
 			this->events = single_threaded_vector(std::move(values));
 
 			this->pinger = PingMe::Pinger(*this, { this, &Monitor::PingCheck });
-			this->Check();
 		};
 
 		Monitor(hstring name, hstring host, hstring method, hstring body, hstring headers, hstring cookies, int timeout, Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events)
@@ -63,6 +62,12 @@ namespace winrt::PingMe::implementation
 			return this->pinger.IsLaunching();
 		};
 
+		void LogHandler(Windows::Foundation::EventHandler<PingMe::CheckEventControl> const& handler) {
+			this->handler = handler;
+
+			if (this->events.Size() < 1) this->Check();
+		};
+
 		hstring Name() { return this->name; }
 		hstring Host() { return this->host; }
 		hstring Method() { return this->method; }
@@ -79,6 +84,9 @@ namespace winrt::PingMe::implementation
 
 			this->events.Append(e);
 			if (parent != nullptr) parent.Update();
+
+			auto checkEventControl = PingMe::CheckEventControl(this->name, e);
+			handler(nullptr, checkEventControl);
 		}
 
 	private:
@@ -88,6 +96,8 @@ namespace winrt::PingMe::implementation
 
 		PingMe::Pinger pinger;
 		PingMe::MonitorPreviewControl parent = PingMe::MonitorPreviewControl(nullptr);
+
+		Windows::Foundation::EventHandler<PingMe::CheckEventControl> handler;
 	};
 }
 

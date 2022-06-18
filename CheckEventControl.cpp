@@ -3,7 +3,7 @@
 #if __has_include("CheckEventControl.g.cpp")
 #include "CheckEventControl.g.cpp"
 #endif
-
+#pragma warning(disable : 4996)
 using namespace winrt;
 using namespace Windows::UI::Xaml;
 
@@ -11,7 +11,21 @@ namespace winrt::PingMe::implementation
 {
     CheckEventControl::CheckEventControl(hstring monitorName, PingMe::CheckEvent e)
     {
+        this->monitorName = monitorName;
+        this->e = e;
+
+
         InitializeComponent();
+
+
+        statusText().Text(to_hstring(e.StatusCode()) + L"/" + to_hstring(e.Ping()));
+        statusText().Foreground(e.color().brush());
+
+        monitorText().Text(monitorName);
+
+        long long time_ = e.Time();
+        auto time = localtime(&time_);
+        dateText().Text(to_hstring(time->tm_mon + 1) + L"/" + to_hstring(time->tm_mday) + L"/" + to_hstring(time->tm_year + 1900) + L" " + to_hstring(time->tm_hour) + L":" + to_hstring(time->tm_min) + L":" + to_hstring(time->tm_sec));
     }
 
 }

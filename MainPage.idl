@@ -1,4 +1,4 @@
-import "MonitorPreviewControl.idl";
+import "CheckEventControl.idl";
 
 namespace PingMe
 {
@@ -6,7 +6,5 @@ namespace PingMe
     runtimeclass MainPage : Windows.UI.Xaml.Controls.Page
     {
         MainPage();
-
-        void DeleteMonitor(MonitorPreviewControl monitor);
     }
 }

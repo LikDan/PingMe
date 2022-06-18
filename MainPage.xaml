@@ -21,5 +21,10 @@
                 <Button Width="335" Height="250" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72" HorizontalAlignment="Center" Content="+" Click="AddHandler"/>
             </VariableSizedWrapGrid>
         </Grid>
+        <ScrollViewer VerticalAlignment="Stretch" MaxHeight="250">
+            <StackPanel x:Name="logPanel">
+                
+            </StackPanel>
+        </ScrollViewer>
     </StackPanel>
 </Page>

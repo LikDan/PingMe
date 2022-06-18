@@ -11,7 +11,7 @@ namespace winrt::PingMe::implementation
 
         Windows::Foundation::IAsyncAction ReadMonitors();
 
-        void DeleteMonitor(PingMe::MonitorPreviewControl monitor);
+        void AddLog(Windows::Foundation::IInspectable const& sender, PingMe::CheckEventControl const& control);
 
         Windows::Foundation::IAsyncAction AddHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         Windows::Foundation::IAsyncAction SettingsHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
