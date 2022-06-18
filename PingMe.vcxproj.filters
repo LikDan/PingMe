@@ -20,6 +20,9 @@
     <Page Include="CheckEventControl.xaml">
       <Filter>Templates</Filter>
     </Page>
+    <Page Include="CheckEventInfoDialog.xaml">
+      <Filter>Dialogs</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl" />

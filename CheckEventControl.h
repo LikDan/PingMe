@@ -12,6 +12,8 @@ namespace winrt::PingMe::implementation
     {
         CheckEventControl(hstring monitorName, PingMe::CheckEvent e);
 
+        Windows::Foundation::IAsyncAction InfoHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+
     private:
         PingMe::CheckEvent e = PingMe::CheckEvent(nullptr);
         hstring monitorName;

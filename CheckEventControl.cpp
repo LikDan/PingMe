@@ -30,4 +30,11 @@ namespace winrt::PingMe::implementation
         dateText().Text(to_hstring(time->tm_mon + 1) + L"/" + to_hstring(time->tm_mday) + L"/" + to_hstring(time->tm_year + 1900) + L" " + to_hstring(time->tm_hour) + L":" + to_hstring(time->tm_min) + L":" + to_hstring(time->tm_sec));
     }
 
+    Windows::Foundation::IAsyncAction CheckEventControl::InfoHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e) {
+        CheckEventInfoDialog checkEventInfoDialog = CheckEventInfoDialog(this->monitorName, this->e);
+
+        checkEventInfoDialog.Title(winrt::box_value(L"Info"));
+        checkEventInfoDialog.CloseButtonText(L"Close");
+        co_await checkEventInfoDialog.ShowAsync();
+    }
 }

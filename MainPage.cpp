@@ -5,7 +5,9 @@
 #include "Monitor.h"
 #include "Utils.h"
 
-#include "ctime";
+#include "ctime"
+
+#include <algorithm>
 
 using namespace winrt::Windows::UI::Xaml::Controls;
 
@@ -41,16 +43,7 @@ namespace winrt::PingMe::implementation
 			for (int i = 0; i < events.Size(); i++) sortedEvents.push_back(std::pair(_monitor.second.Name(), events.GetAt(i)));
 		}
 
-		//source: https://www.programiz.com/dsa/insertion-sort
-		for (int step = 1; step < sortedEvents.size(); step++) {
-			long key = sortedEvents[step].second.Time();
-			int j = step - 1;
-			while (key < sortedEvents[j].second.Time() && j >= 0) {
-				sortedEvents[j + 1] = sortedEvents[j];
-				--j;
-			}
-			sortedEvents[j + 1] = sortedEvents[step];
-		}
+		std::sort(sortedEvents.begin(), sortedEvents.end(), [](std::pair<hstring, CheckEvent> e1, std::pair<hstring, CheckEvent> e2) { return e1.second.Time() < e2.second.Time(); });
 
 		for (int i = 0; i < 100; i++) {
 			if (sortedEvents.size() + i - 100 < 0) continue;
@@ -92,12 +85,12 @@ namespace winrt::PingMe::implementation
 
 	Windows::Foundation::IAsyncAction MainPage::SettingsHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		SettingsDialog addMonitorDialog;
+		SettingsDialog settingsDialog;
 
-		addMonitorDialog.Title(winrt::box_value(L"Settings"));
-		addMonitorDialog.PrimaryButtonText(L"Ok");
-		addMonitorDialog.CloseButtonText(L"Close");
-		auto result = co_await addMonitorDialog.ShowAsync();
+		settingsDialog.Title(winrt::box_value(L"Settings"));
+		settingsDialog.PrimaryButtonText(L"Ok");
+		settingsDialog.CloseButtonText(L"Close");
+		auto result = co_await settingsDialog.ShowAsync();
 
 		if (result != Controls::ContentDialogResult::Primary) co_return;
 

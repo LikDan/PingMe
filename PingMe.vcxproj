@@ -138,6 +138,10 @@
       <DependentUpon>CheckEventControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="CheckEventInfoDialog.h">
+      <DependentUpon>CheckEventInfoDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="Files.h">
       <DependentUpon>Files.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -187,6 +191,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="CheckEventControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CheckEventInfoDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
@@ -278,6 +285,10 @@
       <DependentUpon>CheckEventControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="CheckEventInfoDialog.cpp">
+      <DependentUpon>CheckEventInfoDialog.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="Files.cpp">
       <DependentUpon>Files.idl</DependentUpon>
       <SubType>Code</SubType>
@@ -331,6 +342,10 @@
     </Midl>
     <Midl Include="CheckEventControl.idl">
       <DependentUpon>CheckEventControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="CheckEventInfoDialog.idl">
+      <DependentUpon>CheckEventInfoDialog.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="Files.idl">

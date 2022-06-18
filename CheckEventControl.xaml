@@ -12,7 +12,7 @@
         <TextBlock x:Name="statusText" HorizontalAlignment="Left" Foreground="Lime" FontSize="24" Text="200/100" Margin="30,0,0,0"/>
         <TextBlock x:Name="monitorText" HorizontalAlignment="Left" Foreground="White" FontSize="24" Text="MonitorName" Margin="140,0,0,0"></TextBlock>
         <TextBlock x:Name="dateText" HorizontalAlignment="Right" Foreground="White" FontSize="24" Text="99/99/99 99:99" Margin="0,0,30,0"></TextBlock>
-        <Button x:Name="infoButton" HorizontalAlignment="Right" Background="Transparent" Padding="0" BorderThickness="0" Width="25" Height="25">
+        <Button x:Name="infoButton" HorizontalAlignment="Right" Background="Transparent" Padding="0" BorderThickness="0" Width="25" Height="25" Click="InfoHandler">
             <Image Source="/Assets/Info.png"/>
         </Button>
     </Grid>
