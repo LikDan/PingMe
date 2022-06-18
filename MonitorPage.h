@@ -21,6 +21,8 @@ namespace winrt::PingMe::implementation
         const std::regex urlRegex = std::regex("http://[a-zA-Z0-9%\-./]+");
         const std::regex jsonMapRegex = std::regex("\\{\"[^\"]+\":\"[^\"]+\"(?:,\"[^\"]+\":\"[^\"]*\"){0,}\\}");
         const std::regex timeoutRegex = std::regex("[0-9]{1,5}");
+
+        Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events;
     };
 }
 

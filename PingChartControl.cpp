@@ -92,6 +92,7 @@ namespace winrt::PingMe::implementation
             if (events.GetAt(i).Ping() < minPing) minPing = events.GetAt(i).Ping();
         }
 
+        if (points.size() < 1) return;
 
         float maxY = points[0].y;
         for each (CPoint point in points) {

@@ -33,14 +33,14 @@ namespace winrt::PingMe::implementation
 		PingChart().Update(this->monitor.Events());
 	}
 
-	void MonitorPreviewControl::StateChange(IInspectable const&, RoutedEventArgs const&) 
+	void MonitorPreviewControl::StateChange(IInspectable const&, RoutedEventArgs const&)
 	{
 		if (this->monitor.IsLaunching())
 		{
 			this->monitor.Pause();
 			StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Play.png")));
 		}
-		else 
+		else
 		{
 			this->monitor.Continue();
 			StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
@@ -77,9 +77,23 @@ namespace winrt::PingMe::implementation
 		}
 
 		this->monitor = newMonitor;
-		saveMonitors();
+		Files().SaveMonitors();
 
 		StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
 		Update();
+	}
+
+	void MonitorPreviewControl::DeleteHandler(IInspectable const&, RoutedEventArgs const&)
+	{
+		this->monitor.Pause();
+		monitors.erase(this->monitor.Name());
+		this->Visibility(Visibility::Collapsed);
+
+		Files().SaveMonitors();
+	}
+
+	void MonitorPreviewControl::CheckHandler(IInspectable const&, RoutedEventArgs const&)
+	{
+		this->monitor.Check();
 	}
 }

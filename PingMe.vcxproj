@@ -121,6 +121,14 @@
       <DependentUpon>CheckEvent.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="CheckEventControl.h">
+      <DependentUpon>CheckEventControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="Files.h">
+      <DependentUpon>Files.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="HTTPRequests.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Monitor.h">
@@ -165,6 +173,9 @@
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CheckEventControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -187,19 +198,31 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Edit.png" />
+    <Image Include="Assets\Info.png" />
     <Image Include="Assets\LockScreenLogo.scale-200.png" />
     <Image Include="Assets\Pause.PNG" />
     <Image Include="Assets\Play.png" />
+    <Image Include="Assets\Settings.png" />
     <Image Include="Assets\SplashScreen.scale-200.png" />
     <Image Include="Assets\Square150x150Logo.scale-200.png" />
     <Image Include="Assets\Square44x44Logo.scale-200.png" />
     <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Image Include="Assets\StoreLogo.png" />
+    <Image Include="Assets\Trash.png" />
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckEvent.cpp">
       <DependentUpon>CheckEvent.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="CheckEventControl.cpp">
+      <DependentUpon>CheckEventControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="Files.cpp">
+      <DependentUpon>Files.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="Monitor.cpp">
@@ -247,6 +270,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
     <Midl Include="CheckEvent.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="CheckEventControl.idl">
+      <DependentUpon>CheckEventControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="Files.idl">
       <SubType>Designer</SubType>
     </Midl>
     <Midl Include="MainPage.idl">

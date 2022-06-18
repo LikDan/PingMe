@@ -1,0 +1,10 @@
+import "CheckEvent.idl";
+
+namespace PingMe
+{
+    [default_interface]
+    runtimeclass CheckEventControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        CheckEventControl(String monitorName, CheckEvent e);
+    }
+}

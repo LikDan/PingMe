@@ -24,7 +24,7 @@ namespace winrt::PingMe::implementation
 
 	Windows::Foundation::IAsyncAction MainPage::ReadMonitors()
 	{
-		co_await readMonitors();
+		co_await Files().ReadMonitors();
 		for each (auto _monitor in monitors)
 		{
 			auto control = MonitorPreviewControl(_monitor.second);
@@ -35,7 +35,17 @@ namespace winrt::PingMe::implementation
 		}
 	}
 
-	Windows::Foundation::IAsyncAction MainPage::ClickHandler(const IInspectable&, const RoutedEventArgs&)
+	void MainPage::DeleteMonitor(PingMe::MonitorPreviewControl monitor) {
+		for (int i = 0; i < statusPanel().Children().Size(); i++)
+		{
+			if (statusPanel().Children().GetAt(i) != monitor) continue;
+
+			statusPanel().Children().RemoveAt(i);
+			break;
+		}
+	}
+
+	Windows::Foundation::IAsyncAction MainPage::AddHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
 		MonitorPage monitorDialog;
 
@@ -59,14 +69,14 @@ namespace winrt::PingMe::implementation
 
 		statusPanel().Children().InsertAt(0, control);
 
-		saveMonitors();
+		Files().SaveMonitors();
 	}
 
-	Windows::Foundation::IAsyncAction MainPage::EventHandler(const IInspectable&, const RoutedEventArgs&)
+	Windows::Foundation::IAsyncAction MainPage::SettingsHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
 		SettingsDialog addMonitorDialog;
 
-		addMonitorDialog.Title(winrt::box_value(L"Add new monitor"));
+		addMonitorDialog.Title(winrt::box_value(L"Settings"));
 		addMonitorDialog.PrimaryButtonText(L"Ok");
 		addMonitorDialog.CloseButtonText(L"Close");
 		auto result = co_await addMonitorDialog.ShowAsync();
@@ -79,18 +89,8 @@ namespace winrt::PingMe::implementation
 		}
   	}
 
-	void MainPage::StartHandler(const IInspectable&, const RoutedEventArgs&)
+	void MainPage::InfoHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		// monitors[L"Google"].launch();
-	}
-
-	void MainPage::WriteHandler(const IInspectable&, const RoutedEventArgs&)
-	{
-	}
-
-	void MainPage::Handler(const IInspectable&, const IInspectable&)
-	{
-		// monitors[L"Google"].event();
-		// monitorViews[L"Google"].MonitorName(L"Google");
+		system("chrome https://github.com/LikDan/PingMe");
 	}
 }

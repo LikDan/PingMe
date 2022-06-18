@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="PingMe.CheckEventControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PingMe"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="250">
+        <!--<Rectangle x:Name="statusRectangle" HorizontalAlignment="Left" Fill="Lime" Width="10" Height="10" RadiusX="100" RadiusY="100"></Rectangle>-->
+        <TextBlock x:Name="statusText" HorizontalAlignment="Left" Foreground="Lime" Text="200" Margin="15,0,0,0"/>
+        <TextBlock x:Name="monitorText" HorizontalAlignment="Left" Foreground="White" Text="MonitorName" Margin="45,0,0,0"></TextBlock>
+        <TextBlock x:Name="dateText" HorizontalAlignment="Right" Foreground="White" Text="99/99/99 99:99" Margin="0,0,15,0"></TextBlock>
+        <Button x:Name="infoButton" HorizontalAlignment="Right" Background="Transparent" Padding="0" BorderThickness="0" Width="10" Height="10">
+            <Image Source="/Assets/Info.png"/>
+        </Button>
+    </Grid>
+</UserControl>

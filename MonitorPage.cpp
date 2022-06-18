@@ -25,6 +25,8 @@ namespace winrt::PingMe::implementation
 
     MonitorPage::MonitorPage(PingMe::Monitor monitor) : MonitorPage()
     {
+        this->events = monitor.Events();
+
         NameText().Text(monitor.Name());
         HostText().Text(monitor.Host());
 
@@ -46,7 +48,10 @@ namespace winrt::PingMe::implementation
     PingMe::Monitor MonitorPage::Result() {
         int timeout = std::stoi(to_string(TimeoutText().Text()));
         auto method = unbox_value<hstring>(MethodText().SelectedValue().as<Controls::ComboBoxItem>().Content());
-        return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
+        
+        if (this->events == nullptr) return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
+        else return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout, this->events);
+ 
     }
 
     void MonitorPage::TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args)
@@ -56,6 +61,7 @@ namespace winrt::PingMe::implementation
             (HeadersText().Text() == L"" || std::regex_match(to_string(HeadersText().Text()), jsonMapRegex)) &&
             (CookiesText().Text() == L"" || std::regex_match(to_string(CookiesText().Text()), jsonMapRegex)) &&
             std::regex_match(to_string(TimeoutText().Text()), timeoutRegex);
+
         this->IsPrimaryButtonEnabled(enable);
     }
 }

@@ -17,6 +17,9 @@
     <Page Include="SettingsDialog.xaml">
       <Filter>Dialogs</Filter>
     </Page>
+    <Page Include="CheckEventControl.xaml">
+      <Filter>Templates</Filter>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl" />
@@ -34,6 +37,9 @@
       <Filter>Models</Filter>
     </Midl>
     <Midl Include="Settings.idl">
+      <Filter>Models</Filter>
+    </Midl>
+    <Midl Include="Files.idl">
       <Filter>Models</Filter>
     </Midl>
   </ItemGroup>
@@ -87,6 +93,18 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Pause.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Edit.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Info.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Settings.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Trash.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
