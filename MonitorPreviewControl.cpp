@@ -24,7 +24,9 @@ namespace winrt::PingMe::implementation
 
 	void MonitorPreviewControl::Update()
 	{
-		MainContainer().Background(RGBA(255, 165, 0).brush());
+		if (this->monitor.Events().Size() < 1) MainContainer().Background(RGBA(255, 165, 0).brush());
+		else MainContainer().Background(this->monitor.Events().GetAt(this->monitor.Events().Size() - 1).color().brush());
+
 
 		NameTextBlock().Text(this->monitor.Name());
 		HostTextBlock().Text(this->monitor.Host());
