@@ -8,9 +8,7 @@
     mc:Ignorable="d">
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0">
-        <!--<Canvas HorizontalAlignment="Left" Width="25" Height="25">
-            <Rectangle x:Name="statusRectangle" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="Lime" Width="25" Height="25" RadiusX="100" RadiusY="100"/>
-        </Canvas>-->
+        <Rectangle x:Name="statusRectangle" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="Lime" Width="25" Height="25" RadiusX="100" RadiusY="100"/>
         <TextBlock x:Name="statusText" HorizontalAlignment="Left" Foreground="Lime" FontSize="24" Text="200/100" Margin="30,0,0,0"/>
         <TextBlock x:Name="monitorText" HorizontalAlignment="Left" Foreground="White" FontSize="24" Text="MonitorName" Margin="140,0,0,0"></TextBlock>
         <TextBlock x:Name="dateText" HorizontalAlignment="Right" Foreground="White" FontSize="24" Text="99/99/99 99:99" Margin="0,0,30,0"></TextBlock>

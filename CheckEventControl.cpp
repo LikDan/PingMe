@@ -17,9 +17,11 @@ namespace winrt::PingMe::implementation
 
         InitializeComponent();
 
+        auto color = e.color().brush();
 
         statusText().Text(to_hstring(e.StatusCode()) + L"/" + to_hstring(e.Ping()));
-        statusText().Foreground(e.color().brush());
+        statusText().Foreground(color);
+        statusRectangle().Fill(color);
 
         monitorText().Text(monitorName);
 

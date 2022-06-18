@@ -4,9 +4,6 @@
 #include "PingChartControl.g.cpp"
 #endif
 
-#include <winrt/Windows.UI.Xaml.Media.Imaging.h>
-#include <winrt/Windows.UI.Xaml.Shapes.h>
-
 #pragma warning(disable : 4996)
 
 #include <Utils.h>
