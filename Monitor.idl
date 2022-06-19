@@ -22,6 +22,7 @@ namespace PingMe
         Boolean IsLaunching();
 
         void LogHandler(Windows.Foundation.EventHandler<CheckEventControl> handler);
+        Windows.Foundation.EventHandler<CheckEventControl> LogHandler();
 
         String Name{ get; };
         String Host{ get; };

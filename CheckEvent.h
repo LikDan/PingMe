@@ -22,15 +22,15 @@ namespace winrt::PingMe::implementation
             case 1:
             case 2:
             case 3:
-                return RGBA(50, 255, 50);
+                return RGBA(1, 82, 58);
                 break;
             case 0:
             case 4:
             case 5:
-                return RGBA(255, 50, 50, 100);
+                return RGBA(216, 106, 73);
                 break;
             default:
-                return RGBA(255, 255, 50);
+                return RGBA(171, 162, 158);
                 break;
             }
         }

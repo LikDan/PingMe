@@ -65,6 +65,7 @@ namespace winrt::PingMe::implementation
 
 		auto newMonitor = monitorDialog.Result();
 		newMonitor.Parent(monitor.Parent());
+		newMonitor.LogHandler(monitor.LogHandler());
 
 		auto name = this->monitor.Name();
 		auto newName = newMonitor.Name();

@@ -68,6 +68,10 @@ namespace winrt::PingMe::implementation
 			if (this->events.Size() < 1) this->Check();
 		};
 
+		Windows::Foundation::EventHandler<PingMe::CheckEventControl> LogHandler() {
+			return this->handler;
+		};
+
 		hstring Name() { return this->name; }
 		hstring Host() { return this->host; }
 		hstring Method() { return this->method; }
