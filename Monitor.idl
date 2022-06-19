@@ -10,7 +10,7 @@ namespace PingMe
     {
         Monitor();
         Monitor(String name, String host, String method, String body, String headers, String cookies, Int32 timeout);
-        Monitor(String name, String host, String method, String body, String headers, String cookies, Int32 timeout, Windows.Foundation.Collections.IVector<CheckEvent> events);
+        Monitor(String name, String host, String method, String body, String headers, String cookies, Int32 timeout, Boolean launch, Windows.Foundation.Collections.IVector<CheckEvent> events);
         
         MonitorPreviewControl Parent{ get; set; };
 

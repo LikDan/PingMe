@@ -32,6 +32,7 @@ namespace winrt::PingMe::implementation
 			auto headers = monitorJson["headers"].get<std::string>();
 			auto cookies = monitorJson["cookies"].get<std::string>();
 			auto timeout = monitorJson["timeout"].get<int>();
+			auto launching = monitorJson["launching"].get<bool>();
 
 
 			std::vector<PingMe::CheckEvent> values{};
@@ -50,7 +51,7 @@ namespace winrt::PingMe::implementation
 				events.Append(checkEvent);
 			}
 
-			auto monitor = PingMe::Monitor(to_hstring(name), to_hstring(host), to_hstring(method), to_hstring(body), to_hstring(headers), to_hstring(cookies), timeout, events);
+			auto monitor = PingMe::Monitor(to_hstring(name), to_hstring(host), to_hstring(method), to_hstring(body), to_hstring(headers), to_hstring(cookies), timeout, launching, events);
 			monitors[monitor.Name()] = monitor;
 		}
 	}
@@ -70,6 +71,7 @@ namespace winrt::PingMe::implementation
 			monitorJson["headers"] = to_string(monitor.second.Headers());
 			monitorJson["cookies"] = to_string(monitor.second.Cookies());
 			monitorJson["timeout"] = monitor.second.Timeout();
+			monitorJson["launching"] = monitor.second.IsLaunching();
 
 			auto events = monitor.second.Events();
 			json eventsJson;
@@ -97,4 +99,30 @@ namespace winrt::PingMe::implementation
 		co_await winrt::Windows::Storage::FileIO::WriteTextAsync(file, content);
 		co_await getFile(L"monitors.json");
     }
+
+
+
+
+	Windows::Foundation::IAsyncAction Files::ReadSettings()
+	{
+		auto file = co_await getFile(L"settings.json");
+		hstring text = co_await winrt::Windows::Storage::FileIO::ReadTextAsync(file);
+
+		auto settingsJson = json::parse(to_string(text));
+		auto chartHours = settingsJson["chartHours"].get<int>();
+
+		settings.ChartHours(chartHours);
+	}
+
+	Windows::Foundation::IAsyncAction Files::SaveSettings()
+	{
+		json settingsJson;
+		settingsJson["chartHours"] = settings.ChartHours();
+
+		auto content = to_hstring(settingsJson.dump());
+
+		auto file = co_await getFile(L"settings.json");
+		co_await winrt::Windows::Storage::FileIO::WriteTextAsync(file, content);
+		co_await getFile(L"monitors.json");
+	}
 }

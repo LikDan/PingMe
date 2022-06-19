@@ -99,7 +99,7 @@ namespace winrt::PingMe::implementation
                 Canvas::SetLeft(rectangle, points[i - 1].x);
                 Canvas::SetTop(rectangle, 0);
 
-                rectangle.Fill(points[i].color.brush());
+                rectangle.Fill(RGBA(216, 106, 73, 100).brush());
 
                 ChartCanvas().Children().Append(rectangle);
             }

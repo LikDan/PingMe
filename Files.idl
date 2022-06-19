@@ -5,8 +5,12 @@ namespace PingMe
     runtimeclass Files 
     {
         Files();
-
+    
         Windows.Foundation.IAsyncAction ReadMonitors();
         Windows.Foundation.IAsyncAction SaveMonitors();
+
+
+        Windows.Foundation.IAsyncAction ReadSettings();
+        Windows.Foundation.IAsyncAction SaveSettings();
     }
 }

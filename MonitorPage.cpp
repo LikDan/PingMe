@@ -50,7 +50,7 @@ namespace winrt::PingMe::implementation
         auto method = unbox_value<hstring>(MethodText().SelectedValue().as<Controls::ComboBoxItem>().Content());
         
         if (this->events == nullptr) return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout);
-        else return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout, this->events);
+        else return Monitor(NameText().Text(), HostText().Text(), method, BodyText().Text(), HeadersText().Text(), CookiesText().Text(), timeout, true, this->events);
  
     }
 

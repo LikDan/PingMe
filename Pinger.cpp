@@ -27,7 +27,6 @@ namespace winrt::PingMe::implementation
 
         this->timer = DispatcherTimer();
         this->timer.Interval(std::chrono::seconds{ monitor.Timeout() });
-        this->timer.Start();
 
         auto lambda = [=](IInspectable const&, IInspectable const&) { Check(); };
 

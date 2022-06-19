@@ -21,6 +21,7 @@ namespace winrt::PingMe::implementation
 	MainPage::MainPage()
 	{
 		InitializeComponent();
+		Files().ReadSettings();
 		ReadMonitors();
 	}
 
@@ -46,8 +47,10 @@ namespace winrt::PingMe::implementation
 		std::sort(sortedEvents.begin(), sortedEvents.end(), [](std::pair<hstring, CheckEvent> e1, std::pair<hstring, CheckEvent> e2) { return e1.second.Time() < e2.second.Time(); });
 
 		for (int i = 0; i < 100; i++) {
-			if (sortedEvents.size() + i - 100 < 0) continue;
-			this->AddLog(nullptr, PingMe::CheckEventControl(sortedEvents[sortedEvents.size() + i - 100].first, sortedEvents[sortedEvents.size() + i - 100].second));
+			int index = sortedEvents.size() + i - 100;
+			if (index < 0) continue;
+
+			this->AddLog(nullptr, PingMe::CheckEventControl(sortedEvents[index].first, sortedEvents[index].second));
 		}
 	}
 
@@ -98,10 +101,12 @@ namespace winrt::PingMe::implementation
 		{
 			monitor.second.Parent().Update();
 		}
+
+		Files().SaveSettings();
   	}
 
 	void MainPage::InfoHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
 	{
-		system("chrome https://github.com/LikDan/PingMe");
+		Windows::System::Launcher::LaunchUriAsync(Windows::Foundation::Uri(L"https://github.com/LikDan/PingMe"));
 	}
 }

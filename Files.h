@@ -14,6 +14,11 @@ namespace winrt::PingMe::implementation
         Windows::Foundation::IAsyncAction ReadMonitors();
         Windows::Foundation::IAsyncAction SaveMonitors();
 
+
+
+        Windows::Foundation::IAsyncAction ReadSettings();
+        Windows::Foundation::IAsyncAction SaveSettings();
+
     private: 
         Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> getFile(hstring name) {
             Windows::Storage::StorageFolder localFolder = winrt::Windows::Storage::ApplicationData::Current().LocalFolder();

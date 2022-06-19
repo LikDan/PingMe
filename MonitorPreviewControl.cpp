@@ -33,6 +33,9 @@ namespace winrt::PingMe::implementation
 		TimeoutTextBlock().Text(to_hstring(this->monitor.Timeout()));
 
 		PingChart().Update(this->monitor.Events());
+		if (this->monitor.IsLaunching()) StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
+		else StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Play.png")));
+		
 	}
 
 	void MonitorPreviewControl::StateChange(IInspectable const&, RoutedEventArgs const&)
@@ -48,6 +51,7 @@ namespace winrt::PingMe::implementation
 			StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
 		}
 
+		Files().SaveMonitors();
 	}
 
 	Windows::Foundation::IAsyncAction MonitorPreviewControl::EditHandler(IInspectable const&, RoutedEventArgs const&)

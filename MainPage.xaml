@@ -7,8 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d">
 
-    <StackPanel Background="#21252E">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,5,0,0">
+
+    <RelativePanel Background="#21252E">
+        <StackPanel x:Name="toolbarView" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,5,0,0">
             <Button VerticalAlignment="Top" Background="Transparent" Padding="0" BorderThickness="0" Width="30" Height="30" Click="InfoHandler">
                 <Image Source="/Assets/Info.png"/>
             </Button>
@@ -16,13 +17,15 @@
                 <Image Source="/Assets/Settings.png"/>
             </Button>
         </StackPanel>
-        <Grid Height="550">
-            <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="statusPanel" UseLayoutRounding="True">
-                <Button Width="335" Height="250" Background="#424242" Windows10version1809:CornerRadius="15" FontSize="72" HorizontalAlignment="Center" Content="+" Click="AddHandler"/>
-            </VariableSizedWrapGrid>
-        </Grid>
-        <ScrollViewer VerticalAlignment="Stretch" MaxHeight="250">
+        <ScrollViewer x:Name="monitorsView" RelativePanel.Below="toolbarView">
+            <Grid>
+                <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="statusPanel" UseLayoutRounding="True">
+                    <Button Width="335" Height="250" Foreground="#ABA29E" Background="#FBE8e1" Windows10version1809:CornerRadius="15" FontSize="72" HorizontalAlignment="Center" Content="+" Click="AddHandler"/>
+                </VariableSizedWrapGrid>
+            </Grid>
+        </ScrollViewer>
+        <ScrollViewer x:Name="logView" RelativePanel.Below="monitorsView"  RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Margin="0,20,0,0">
             <StackPanel x:Name="logPanel"/>
         </ScrollViewer>
-    </StackPanel>
+    </RelativePanel>
 </Page>

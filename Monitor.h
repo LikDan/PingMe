@@ -21,9 +21,10 @@ namespace winrt::PingMe::implementation
 			this->events = single_threaded_vector(std::move(values));
 
 			this->pinger = PingMe::Pinger(*this, { this, &Monitor::PingCheck });
+			this->pinger.Continue();
 		};
 
-		Monitor(hstring name, hstring host, hstring method, hstring body, hstring headers, hstring cookies, int timeout, Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events)
+		Monitor(hstring name, hstring host, hstring method, hstring body, hstring headers, hstring cookies, int timeout, bool launch, Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events)
 		{
 			this->name = name;
 			this->host = host;
@@ -35,6 +36,7 @@ namespace winrt::PingMe::implementation
 			this->events = events;
 
 			this->pinger = PingMe::Pinger(*this, { this, &Monitor::PingCheck });
+			if (launch) this->pinger.Continue();
 		};
 
 		Monitor() = default;
