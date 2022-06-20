@@ -5,6 +5,7 @@
 #endif
 
 #include <regex>
+#include <Utils.h>
 
 
 #include <winrt/Windows.Storage.h>
@@ -25,6 +26,7 @@ namespace winrt::PingMe::implementation
 
     MonitorPage::MonitorPage(PingMe::Monitor monitor) : MonitorPage()
     {
+        this->monitorName = monitor.Name();
         this->events = monitor.Events();
 
         NameText().Text(monitor.Name());
@@ -56,7 +58,8 @@ namespace winrt::PingMe::implementation
 
     void MonitorPage::TextUpdate(IInspectable const& sender, KeyRoutedEventArgs const& args)
     {
-        bool enable = NameText().Text() != L"" &&
+        bool enable =  NameText().Text() != L"" &&
+            (monitors.find(NameText().Text()) == monitors.end() || NameText().Text() == monitorName) &&
             std::regex_match(to_string(HostText().Text()), urlRegex) &&
             (HeadersText().Text() == L"" || std::regex_match(to_string(HeadersText().Text()), jsonMapRegex)) &&
             (CookiesText().Text() == L"" || std::regex_match(to_string(CookiesText().Text()), jsonMapRegex)) &&

@@ -23,6 +23,7 @@ namespace winrt::PingMe::implementation
         const std::regex timeoutRegex = std::regex("[0-9]{1,5}");
 
         Windows::Foundation::Collections::IVector<PingMe::CheckEvent> events;
+        hstring monitorName;
     };
 }
 
