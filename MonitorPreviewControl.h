@@ -20,6 +20,7 @@ namespace winrt::PingMe::implementation
         Windows::Foundation::IAsyncAction EditHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 
         void CheckHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
+        void RestoreHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
 
         winrt::PingMe::Monitor Monitor() { return this->monitor; }
 

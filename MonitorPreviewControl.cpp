@@ -94,7 +94,8 @@ namespace winrt::PingMe::implementation
 	{
 		this->monitor.Pause();
 		monitors.erase(this->monitor.Name());
-		this->Visibility(Visibility::Collapsed);
+		monitorGrid().Visibility(Visibility::Collapsed);
+		restoreGrid().Visibility(Visibility::Visible);
 
 		Files().SaveMonitors();
 	}
@@ -102,5 +103,17 @@ namespace winrt::PingMe::implementation
 	void MonitorPreviewControl::CheckHandler(IInspectable const&, RoutedEventArgs const&)
 	{
 		this->monitor.Check();
+	}
+
+	void MonitorPreviewControl::RestoreHandler(IInspectable const&, RoutedEventArgs const&)
+	{
+		monitors[this->monitor.Name()] = this->monitor;
+		this->monitor.Continue();
+
+		restoreGrid().Visibility(Visibility::Collapsed);
+		monitorGrid().Visibility(Visibility::Visible);
+
+		StateImage().Source(BitmapImage(Uri(L"ms-appx:///Assets/Pause.png")));
+		Files().SaveMonitors();
 	}
 }
